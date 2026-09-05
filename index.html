@@ -2,664 +2,574 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#c8102e">
-<title>Polish Buddy V4 🇵🇱</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1769aa">
+<title>Polish Buddy V5</title>
 
 <style>
-:root{
---bg:#f5f5f7;
---card:#ffffff;
---text:#171717;
---muted:#6b7280;
---red:#c8102e;
---green:#16834b;
---gold:#d99b00;
---border:#e5e7eb;
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
-
-*{box-sizing:border-box}
 
 body{
-margin:0;
-background:var(--bg);
-color:var(--text);
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:#f3f6f9;
+  color:#17202a;
 }
 
-button{
-font-family:inherit;
-cursor:pointer;
+header{
+  background:linear-gradient(135deg,#1769aa,#2196f3);
+  color:white;
+  padding:22px 18px 18px;
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:20;
 }
 
-.app{
-max-width:600px;
-margin:auto;
-min-height:100vh;
-padding-bottom:85px;
+header h1{
+  margin:0;
+  font-size:27px;
 }
 
-.top{
-background:#fff;
-border-bottom:1px solid var(--border);
-padding:20px 17px 15px;
+header p{
+  margin:5px 0 0;
+  opacity:.9;
 }
 
-.header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.flag{
-font-size:35px;
-}
-
-h1{
-margin:0;
-font-size:28px;
-}
-
-h2{
-margin:0 0 12px;
-font-size:21px;
-}
-
-h3{
-margin:4px 0;
-}
-
-.sub{
-color:var(--muted);
-font-size:14px;
-}
-
-.xp{
-font-weight:800;
-color:var(--gold);
-}
-
-.level{
-font-size:13px;
-font-weight:700;
-}
-
-.content{
-padding:15px;
+.container{
+  max-width:650px;
+  margin:auto;
+  padding:16px 14px 100px;
 }
 
 .card{
-background:var(--card);
-border:1px solid var(--border);
-border-radius:18px;
-padding:17px;
-margin-bottom:14px;
-box-shadow:0 2px 8px #00000008;
+  background:white;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:15px;
+  box-shadow:0 3px 12px rgba(0,0,0,.07);
 }
 
-.progress{
-height:10px;
-background:#eee;
-border-radius:20px;
-overflow:hidden;
+.hero{
+  background:linear-gradient(135deg,#ffffff,#eaf5ff);
 }
 
-.bar{
-height:100%;
-width:0%;
-background:var(--green);
-transition:.3s;
+.day-number{
+  font-size:14px;
+  font-weight:700;
+  color:#1769aa;
+  text-transform:uppercase;
+  letter-spacing:.7px;
 }
 
-.btn{
-width:100%;
-border:0;
-border-radius:14px;
-padding:14px 15px;
-font-size:16px;
-font-weight:750;
-background:var(--red);
-color:white;
-margin-top:9px;
+.polish{
+  font-size:32px;
+  font-weight:800;
+  margin:8px 0;
 }
 
-.btn.secondary{
-background:#eeeeef;
-color:#222;
-}
-
-.btn.correct{
-background:var(--green);
-color:#fff;
-}
-
-.btn.wrong{
-background:#fde7e9;
-color:#9d1826;
-border:1px solid var(--red);
-}
-
-.btn:disabled{
-opacity:.8;
-}
-
-.lesson{
-display:flex;
-align-items:center;
-gap:11px;
-background:#fff;
-border:1px solid var(--border);
-border-radius:14px;
-padding:12px;
-margin:8px 0;
-cursor:pointer;
-}
-
-.ico{
-font-size:27px;
-}
-
-.lesson-info{
-flex:1;
-}
-
-.lesson-info b{
-display:block;
-}
-
-.lesson-info small{
-display:block;
-color:var(--muted);
-margin-top:3px;
-}
-
-.tick{
-font-size:20px;
-}
-
-.word{
-text-align:center;
-font-size:34px;
-font-weight:850;
-margin:18px 0 5px;
-}
-
-.pron{
-text-align:center;
-font-size:19px;
-font-weight:700;
-margin:7px 0;
-}
-
-.pron span{
-color:var(--red);
+.pronunciation{
+  background:#fff3cd;
+  border-radius:12px;
+  padding:12px;
+  font-size:19px;
+  font-weight:700;
+  color:#7a5600;
+  margin:12px 0;
 }
 
 .meaning{
-text-align:center;
-font-size:18px;
-margin:12px;
+  font-size:18px;
+  color:#555;
 }
 
-.tip{
-background:#f5f5f6;
-border-radius:13px;
-padding:12px;
-margin-top:12px;
-color:#444;
-line-height:1.45;
+button{
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:14px;
+  margin-top:10px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
 }
 
-.feedback{
-padding:12px;
-border-radius:12px;
-margin-top:12px;
-font-weight:650;
+.primary{
+  background:#1769aa;
+  color:white;
 }
 
-.ok{
-background:#e7f7ee;
-color:#12623a;
+.secondary{
+  background:#e8f1f8;
+  color:#1769aa;
 }
 
-.bad{
-background:#fdeaea;
-color:#9d1826;
+.green{
+  background:#20a464;
+  color:white;
 }
 
-.hidden{
-display:none!important;
+.orange{
+  background:#f39c12;
+  color:white;
 }
 
-.back{
-border:0;
-background:none;
-color:var(--red);
-font-size:16px;
-padding:0 0 12px;
+.red{
+  background:#e74c3c;
+  color:white;
 }
 
-.tabs{
-display:flex;
-gap:7px;
-overflow-x:auto;
-padding-bottom:4px;
-margin-bottom:12px;
-}
-
-.tabs button{
-border:1px solid var(--border);
-background:#fff;
-border-radius:20px;
-padding:9px 12px;
-white-space:nowrap;
-}
-
-.tabs button.active{
-background:#171717;
-color:#fff;
-}
-
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
-
-.mini{
-background:#f6f6f7;
-border-radius:14px;
-padding:13px;
-}
-
-.big{
-font-size:28px;
-font-weight:850;
-}
-
-.conv{
-border:1px solid var(--border);
-border-radius:14px;
-padding:14px;
-margin:9px 0;
-cursor:pointer;
-}
-
-.bubble{
-background:#f1f1f2;
-border-radius:13px;
-padding:11px;
-margin:8px 0;
-line-height:1.4;
-}
-
-.bubble.you{
-background:#fbe8eb;
-}
-
-.bubble small{
-display:block;
-font-weight:700;
-color:var(--muted);
-margin-bottom:3px;
-}
-
-.badge{
-display:inline-block;
-background:#f3f3f4;
-border-radius:13px;
-padding:11px;
-margin:4px 2px;
-font-size:13px;
-line-height:1.4;
-}
-
-.locked{
-opacity:.38;
+button:disabled{
+  opacity:.5;
 }
 
 .nav{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-background:#fff;
-border-top:1px solid var(--border);
-z-index:20;
-}
-
-.nav-inner{
-max-width:600px;
-margin:auto;
-display:flex;
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  border-top:1px solid #ddd;
+  display:flex;
+  justify-content:space-around;
+  padding:8px 4px calc(8px + env(safe-area-inset-bottom));
+  z-index:30;
 }
 
 .nav button{
-flex:1;
-border:0;
-background:#fff;
-padding:9px 3px;
-color:#555;
-font-size:13px;
+  background:none;
+  margin:0;
+  padding:6px 2px;
+  font-size:12px;
+  color:#555;
 }
 
 .nav button.active{
-color:var(--red);
-font-weight:800;
+  color:#1769aa;
 }
 
-.empty{
-text-align:center;
-padding:20px;
-color:var(--muted);
+.progress{
+  height:12px;
+  background:#e4e8eb;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:10px;
 }
 
-.small-note{
-font-size:13px;
-color:var(--muted);
+.progress-bar{
+  height:100%;
+  background:#1769aa;
+  width:0%;
+  transition:.4s;
 }
 
-.listening-polish{
-font-size:27px;
-font-weight:800;
-text-align:center;
-padding:15px;
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
 }
 
-.answer-letter{
-font-weight:800;
-margin-right:5px;
+.stat{
+  background:#f5f8fa;
+  border-radius:14px;
+  padding:13px 5px;
+  text-align:center;
 }
 
-@media(max-width:390px){
-.word{font-size:29px}
+.stat strong{
+  display:block;
+  font-size:21px;
+}
+
+.stat span{
+  font-size:12px;
+  color:#666;
+}
+
+.section-title{
+  font-size:21px;
+  margin:5px 0 15px;
+}
+
+.phrase-box{
+  border:2px solid #e7edf2;
+  border-radius:15px;
+  padding:15px;
+  margin-bottom:10px;
+}
+
+.phrase-box .small-polish{
+  font-size:23px;
+  font-weight:800;
+}
+
+.phrase-box .small-pron{
+  color:#9a6a00;
+  font-weight:700;
+  margin-top:4px;
+}
+
+.quiz-option{
+  background:#f3f6f9;
+  color:#222;
+  border:2px solid transparent;
+  text-align:left;
+}
+
+.quiz-option.correct{
+  background:#d9f6e7;
+  border-color:#20a464;
+}
+
+.quiz-option.wrong{
+  background:#ffe0dd;
+  border-color:#e74c3c;
+}
+
+.result{
+  text-align:center;
+  padding:15px;
+  border-radius:15px;
+  margin-top:12px;
+  font-weight:700;
+}
+
+.success{
+  background:#d9f6e7;
+  color:#137542;
+}
+
+.fail{
+  background:#ffe0dd;
+  color:#a93226;
+}
+
+.locked{
+  opacity:.55;
+}
+
+.day-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:7px;
+}
+
+.day-btn{
+  padding:11px 4px;
+  margin:0;
+  font-size:13px;
+  border-radius:10px;
+}
+
+.day-btn.done{
+  background:#20a464;
+  color:white;
+}
+
+.day-btn.current{
+  background:#1769aa;
+  color:white;
+}
+
+.day-btn.locked{
+  background:#ddd;
+  color:#777;
+}
+
+.achievement{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding:13px;
+  border-radius:13px;
+  background:#f5f7f9;
+  margin-bottom:9px;
+}
+
+.achievement.unlocked{
+  background:#fff3cd;
+}
+
+.achievement-icon{
+  font-size:30px;
+}
+
+.listen-word{
+  font-size:28px;
+  font-weight:800;
+  text-align:center;
+  margin:15px 0;
+}
+
+.hidden{
+  display:none !important;
+}
+
+.small{
+  font-size:13px;
+  color:#666;
+}
+
+.center{
+  text-align:center;
+}
+
+.big-emoji{
+  font-size:50px;
+}
+
+.xp{
+  color:#1769aa;
+  font-weight:800;
+}
+
+hr{
+  border:0;
+  border-top:1px solid #eee;
+  margin:18px 0;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  border:2px solid #ddd;
+  border-radius:12px;
+  font-size:16px;
+}
+
+@media(max-width:380px){
+  .polish{font-size:27px}
+  .day-grid{grid-template-columns:repeat(4,1fr)}
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
-
-<header class="top">
-<div class="header">
-
-<div>
-<div class="flag">🇵🇱</div>
-<h1>Polish Buddy</h1>
-<div class="sub">V4 • Learn Polish step by step</div>
-</div>
-
-<div style="text-align:right">
-<div class="xp" id="xp">0 XP</div>
-<div class="level">Level <span id="level">1</span></div>
-<div class="sub">🔥 <span id="streak">1</span> day</div>
-</div>
-
-</div>
+<header>
+  <h1>🇵🇱 Polish Buddy</h1>
+  <p>Your daily Polish learning app</p>
 </header>
 
-
-<main class="content">
-
+<main class="container">
 
 <!-- HOME -->
-
 <section id="home">
 
-<div class="card">
+  <div class="card hero center">
+    <div class="big-emoji">🇵🇱</div>
+    <h2>Today's Polish</h2>
+    <p id="homeDay">Day 1 of 100</p>
 
-<h2>🇵🇱 Today's Progress</h2>
+    <div class="progress">
+      <div class="progress-bar" id="mainProgress"></div>
+    </div>
 
-<div class="progress">
-<div class="bar" id="progressBar"></div>
-</div>
+    <button class="primary" onclick="openToday()">
+      📚 Start Today's Lesson
+    </button>
+  </div>
 
-<p>
-<b id="progressPercent">0%</b>
-complete •
-<span id="completedCount">0</span>/100 lessons
-</p>
+  <div class="card">
+    <div class="stats">
+      <div class="stat">
+        <strong id="xpStat">0</strong>
+        <span>⭐ XP</span>
+      </div>
+      <div class="stat">
+        <strong id="streakStat">0</strong>
+        <span>🔥 Streak</span>
+      </div>
+      <div class="stat">
+        <strong id="doneStat">0</strong>
+        <span>📚 Days</span>
+      </div>
+    </div>
+  </div>
 
-<button class="btn" onclick="openLesson(getNextLesson())">
-▶ Continue Learning
-</button>
+  <div class="card">
+    <h3>🎯 Your Level</h3>
+    <h2 id="levelName">Beginner</h2>
+    <p><span id="levelXP">0</span> XP</p>
 
-</div>
+    <div class="progress">
+      <div class="progress-bar" id="levelProgress"></div>
+    </div>
+  </div>
 
-
-<div class="card">
-
-<h2>📚 100-Lesson Course</h2>
-
-<div class="tabs" id="categoryTabs"></div>
-
-<div id="lessonList"></div>
-
-</div>
+  <div class="card">
+    <h3>📅 Course</h3>
+    <p>Complete each daily lesson to unlock the next day.</p>
+    <div class="day-grid" id="homeDays"></div>
+  </div>
 
 </section>
 
 
-<!-- LESSON -->
+<!-- LEARN -->
+<section id="learn" class="hidden">
 
-<section id="lesson" class="hidden">
+  <div class="card">
+    <div class="day-number" id="lessonDay">DAY 1</div>
+    <h2 id="lessonTitle">Today's Lesson</h2>
 
-<button class="back" onclick="goHome()">‹ Back to lessons</button>
+    <div class="polish" id="lessonPolish"></div>
 
-<div class="card">
+    <div class="pronunciation">
+      🗣️ Say it like:<br>
+      <span id="lessonPronunciation"></span>
+    </div>
 
-<div class="sub" id="lessonNumber"></div>
+    <div class="meaning" id="lessonMeaning"></div>
 
-<h2 id="lessonTitle"></h2>
+    <button class="primary" onclick="speakCurrent()">
+      🔊 Hear Polish
+    </button>
 
-<div class="word" id="polishWord"></div>
+    <button class="secondary" onclick="speakSlow()">
+      🐢 Hear Slowly
+    </button>
 
-<div class="pron">
-🔊 How to say it:
-<span id="pronunciation"></span>
-</div>
+    <button class="green" id="learnButton" onclick="markLearned()">
+      ✅ I've Learned This
+    </button>
 
-<div class="meaning" id="meaning"></div>
+    <p class="small center" id="learnStatus"></p>
+  </div>
 
-<button class="btn secondary" onclick="speakCurrent()">
-🔊 Hear Polish
-</button>
+  <div class="card">
+    <h3>🔄 Today's Review</h3>
+    <p class="small">Let's keep yesterday's Polish fresh.</p>
+    <div id="reviewPhrases"></div>
+  </div>
 
-<div class="tip">
-<b>💡 Pronunciation help</b><br>
-The red text shows an easy English-style way to pronounce the Polish.
-Try saying it yourself, then press <b>Hear Polish</b>.
-</div>
+  <div class="card">
+    <h3>💬 Mini Conversation</h3>
+    <div id="conversation"></div>
+  </div>
 
-<button class="btn" onclick="startQuiz()">
-🧠 Practice this lesson
-</button>
-
-</div>
+  <button class="primary" onclick="startQuiz()">
+    🧠 Start 5 Question Quiz
+  </button>
 
 </section>
 
 
 <!-- QUIZ -->
-
 <section id="quiz" class="hidden">
 
-<button class="back" onclick="openLesson(currentLesson)">
-‹ Back to lesson
-</button>
+  <div class="card">
+    <div class="day-number">DAILY QUIZ</div>
+    <h2 id="quizTitle">Question 1 of 5</h2>
 
-<div class="card">
+    <div id="quizQuestion"></div>
 
-<div class="sub" id="quizNumber"></div>
+    <div id="quizOptions"></div>
 
-<h2>🧠 Quick Quiz</h2>
-
-<p id="quizQuestion"></p>
-
-<div id="quizAnswers"></div>
-
-<div id="quizFeedback"></div>
-
-<button
-class="btn hidden"
-id="nextQuiz"
-onclick="nextQuizQuestion()">
-Next Question →
-</button>
-
-</div>
+    <div id="quizResult"></div>
+  </div>
 
 </section>
 
 
-<!-- CONVERSATIONS -->
+<!-- LISTEN -->
+<section id="listen" class="hidden">
 
-<section id="conversations" class="hidden">
+  <div class="card center">
+    <div class="big-emoji">🎧</div>
+    <h2>Listening Practice</h2>
+    <p>Listen to the Polish phrase and choose what it means.</p>
 
-<div class="card">
+    <button class="primary" onclick="startListening()">
+      🎧 Start Listening
+    </button>
+  </div>
 
-<h2>💬 Real Conversations</h2>
+  <div id="listenGame" class="card hidden">
 
-<p>
-Practise useful Polish conversations you can actually use in everyday life.
-</p>
+    <p class="small center">Listen carefully...</p>
 
-<div id="conversationList"></div>
+    <div class="listen-word" id="listenPhrase">
+      🔊
+    </div>
 
-</div>
+    <button class="secondary" onclick="repeatListening()">
+      🔊 Play Again
+    </button>
 
-</section>
+    <div id="listenOptions"></div>
 
+    <div id="listenResult"></div>
 
-<!-- SINGLE CONVERSATION -->
-
-<section id="conversation" class="hidden">
-
-<button class="back" onclick="showSection('conversations')">
-‹ Back to conversations
-</button>
-
-<div class="card">
-
-<h2 id="conversationTitle"></h2>
-
-<div id="conversationBody"></div>
-
-<button class="btn" onclick="hearConversation()">
-🔊 Hear Conversation
-</button>
-
-</div>
+  </div>
 
 </section>
 
 
-<!-- LISTENING -->
+<!-- SPEAK -->
+<section id="speak" class="hidden">
 
-<section id="listening" class="hidden">
+  <div class="card center">
+    <div class="big-emoji">🗣️</div>
+    <h2>Speaking Practice</h2>
+    <p>Say the Polish phrase aloud.</p>
 
-<div class="card">
+    <div class="polish" id="speakPolish"></div>
 
-<h2>🎧 Listening Practice</h2>
+    <div class="pronunciation" id="speakPronunciation"></div>
 
-<p>
-Listen to the Polish phrase and choose the English meaning.
-</p>
+    <button class="primary" onclick="speakPractice()">
+      🔊 Hear It First
+    </button>
 
-<button class="btn" onclick="playListening()">
-🔊 Play Polish
-</button>
+    <button class="green" onclick="trySpeaking()">
+      🎤 Try Saying It
+    </button>
 
-<div id="listeningPrompt" class="tip">
-Press Play to hear the phrase.
-</div>
+    <p id="speechStatus"></p>
 
-<div id="listeningAnswers"></div>
+    <button class="secondary" onclick="showSpeakingAnswer()">
+      👀 Show Answer
+    </button>
 
-<div id="listeningFeedback"></div>
-
-<button
-class="btn hidden"
-id="nextListening"
-onclick="newListening()">
-Next Listening →
-</button>
-
-</div>
+    <div id="speakingAnswer" class="hidden"></div>
+  </div>
 
 </section>
 
 
-<!-- ACHIEVEMENTS -->
+<!-- PROGRESS -->
+<section id="progress" class="hidden">
 
-<section id="achievements" class="hidden">
+  <div class="card center">
+    <div class="big-emoji">📊</div>
+    <h2>Your Progress</h2>
+    <p><strong id="progressPercent">0%</strong> of the course completed</p>
 
-<div class="card">
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </div>
 
-<h2>🏆 Achievements</h2>
+  <div class="card">
+    <h3>🏆 Achievements</h3>
+    <div id="achievements"></div>
+  </div>
 
-<div id="achievementList"></div>
+  <div class="card">
+    <h3>⚠️ Review Mistakes</h3>
+    <div id="mistakesList"></div>
+  </div>
 
-</div>
-
-
-<div class="card">
-
-<h2>📊 My Progress</h2>
-
-<div class="grid">
-
-<div class="mini">
-<div class="big" id="statXP">0</div>
-<div class="sub">XP</div>
-</div>
-
-<div class="mini">
-<div class="big" id="statLevel">1</div>
-<div class="sub">Level</div>
-</div>
-
-<div class="mini">
-<div class="big" id="statLessons">0</div>
-<div class="sub">Lessons</div>
-</div>
-
-<div class="mini">
-<div class="big" id="statAnswers">0</div>
-<div class="sub">Quiz answers</div>
-</div>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h2>🔁 Mistake Review</h2>
-
-<p id="mistakeList">
-No mistakes yet. Great start!
-</p>
-
-</div>
-
-
-<div class="card">
-
-<h2>💡 Your Goal</h2>
-
-<p>
-Keep practising a little every day. Even 10 minutes of Polish can make a big difference.
-</p>
-
-</div>
-
-
-<button class="reset" onclick="resetProgress()">
-Reset all progress
-</button>
+  <div class="card">
+    <h3>⚙️ Settings</h3>
+    <button class="red" onclick="resetProgress()">
+      Reset All Progress
+    </button>
+  </div>
 
 </section>
 
@@ -667,306 +577,144 @@ Reset all progress
 
 
 <!-- NAVIGATION -->
+<nav class="nav">
 
-<div class="nav">
+  <button id="navHome" class="active" onclick="showSection('home')">
+    🏠<br>Home
+  </button>
 
-<div class="nav-inner">
+  <button id="navLearn" onclick="openToday()">
+    📚<br>Learn
+  </button>
 
-<button class="active" onclick="navigate('home',this)">
-🏠<br>Learn
-</button>
+  <button id="navSpeak" onclick="showSection('speak')">
+    🗣️<br>Speak
+  </button>
 
-<button onclick="navigate('conversations',this)">
-💬<br>Talk
-</button>
+  <button id="navListen" onclick="showSection('listen')">
+    🎧<br>Listen
+  </button>
 
-<button onclick="navigate('listening',this)">
-🎧<br>Listen
-</button>
+  <button id="navProgress" onclick="showSection('progress')">
+    📊<br>Progress
+  </button>
 
-<button onclick="navigate('achievements',this)">
-🏆<br>Progress
-</button>
-
-</div>
-
-</div>
-
-</div>
+</nav>
 
 
 <script>
 
 /* =========================================================
-   POLISH BUDDY V4
-   100 LESSONS
-   =========================================================
-
-   Each lesson contains:
-
-   [emoji, title, Polish, pronunciation, meaning, category]
-
+   POLISH BUDDY V5
    ========================================================= */
 
 const lessons = [
 
-["👋","Hello","Dzień dobry","jen DOH-bri","Hello / Good morning","Basics"],
-["👋","Hi / Bye","Cześć","cheshch","Hi / Bye","Basics"],
-["👋","Goodbye","Do widzenia","doh vee-DZEN-ya","Goodbye","Basics"],
-["🌙","Good night","Dobranoc","doh-BRAH-nots","Good night","Basics"],
-["🙏","Thank you","Dziękuję","jen-KOO-yeh","Thank you","Basics"],
-["🙏","Please","Proszę","PROH-sheh","Please / You're welcome","Basics"],
-["😊","How are you?","Jak się masz?","yak shyeh mash","How are you?","Basics"],
-["👍","I'm good","Dobrze","DOH-bzheh","Good / Well","Basics"],
-["🙂","Very good","Bardzo dobrze","BAR-dzoh DOH-bzheh","Very good","Basics"],
-["😐","So-so","Tak sobie","tahk SOH-byeh","So-so","Basics"],
+["👋","Hello","Dzień dobry","jen DOH-bri","Hello / Good morning"],
+["👋","Hi / Bye","Cześć","cheshch","Hi / Bye"],
+["👋","Goodbye","Do widzenia","doh vee-DZEN-ya","Goodbye"],
+["🌙","Good night","Dobranoc","doh-BRAH-nots","Good night"],
+["🙏","Thank you","Dziękuję","jen-KOO-yeh","Thank you"],
+["🙏","Please","Proszę","PROH-sheh","Please / You're welcome"],
+["😊","How are you?","Jak się masz?","yak shyeh mash","How are you?"],
+["👍","I'm good","Dobrze","DOH-bzheh","Good / Well"],
+["🙂","Very good","Bardzo dobrze","BAR-dzoh DOH-bzheh","Very good"],
+["😐","So-so","Tak sobie","tahk SOH-byeh","So-so"],
+["🙋","What is your name?","Jak masz na imię?","yak mash nah EE-myeh","What is your name?"],
+["🙂","My name is...","Mam na imię...","mam nah EE-myeh","My name is..."],
+["🤝","Nice to meet you","Miło mi","MEE-woh mee","Nice to meet you"],
+["🇬🇧","I am English","Jestem Anglikiem","YES-tem an-GLEE-kyem","I am English"],
+["🇵🇱","I speak Polish","Mówię po polsku","MOO-vyeh poh POL-skoo","I speak Polish"],
+["❓","I don't understand","Nie rozumiem","nyeh roh-ZOO-myem","I don't understand"],
+["🐢","Speak slowly","Proszę mówić wolniej","PROH-sheh MOO-vich VOL-nyay","Please speak slowly"],
+["🔁","Repeat please","Proszę powtórzyć","PROH-sheh pof-TOO-zhich","Please repeat"],
+["👌","Okay","Dobrze","DOH-bzheh","Okay / Alright"],
+["❌","No","Nie","nyeh","No"],
+["✅","Yes","Tak","tahk","Yes"],
 
-["🙋","What is your name?","Jak masz na imię?","yak mash nah EE-myeh","What is your name?","Basics"],
-["🙂","My name is...","Mam na imię...","mam nah EE-myeh","My name is...","Basics"],
-["🤝","Nice to meet you","Miło mi","MEE-woh mee","Nice to meet you","Basics"],
-["🇬🇧","I am English","Jestem Anglikiem","YES-tem an-GLEE-kyem","I am English","Basics"],
-["🇵🇱","I speak Polish","Mówię po polsku","MOO-vyeh poh POL-skoo","I speak Polish","Basics"],
-["❓","I don't understand","Nie rozumiem","nyeh roh-ZOO-myem","I don't understand","Basics"],
-["🐢","Speak slowly","Proszę mówić wolniej","PROH-sheh MOO-vich VOL-nyay","Please speak slowly","Basics"],
-["🔁","Repeat please","Proszę powtórzyć","PROH-sheh pof-TOO-zhich","Please repeat","Basics"],
-["👌","Okay","Dobrze","DOH-bzheh","Okay / Alright","Basics"],
-["❌","No","Nie","nyeh","No","Basics"],
+["1️⃣","One","jeden","YEH-den","one"],
+["2️⃣","Two","dwa","dvah","two"],
+["3️⃣","Three","trzy","tshih","three"],
+["4️⃣","Four","cztery","CHTEH-rih","four"],
+["5️⃣","Five","pięć","pyench","five"],
+["6️⃣","Six","sześć","sheshch","six"],
+["7️⃣","Seven","siedem","SHYEH-dem","seven"],
+["8️⃣","Eight","osiem","OH-shyem","eight"],
+["9️⃣","Nine","dziewięć","JEV-yench","nine"],
+["🔟","Ten","dziesięć","JESH-yench","ten"],
+["🔢","Eleven","jedenaście","yeh-deh-NAH-shcheh","eleven"],
+["🔢","Twelve","dwanaście","dvah-NAH-shcheh","twelve"],
+["🔢","Thirteen","trzynaście","tshi-NAH-shcheh","thirteen"],
+["🔢","Fourteen","czternaście","chtehr-NAH-shcheh","fourteen"],
+["🔢","Fifteen","piętnaście","pyent-NAH-shcheh","fifteen"],
+["🔢","Twenty","dwadzieścia","dvah-JESH-chah","twenty"],
+["🔢","Thirty","trzydzieści","tshih-JESH-chee","thirty"],
+["🔢","One hundred","sto","stoh","one hundred"],
+["💷","How much?","Ile?","EE-leh","How much?"],
+["🔢","A lot","dużo","DOO-zhoh","a lot / much"],
 
-["✅","Yes","Tak","tahk","Yes","Basics"],
-["❓","Maybe","Może","MOH-zheh","Maybe","Basics"],
-["🙏","Sorry","Przepraszam","psheh-PRAH-sham","Sorry / Excuse me","Basics"],
-["😊","Excuse me","Przepraszam","psheh-PRAH-sham","Excuse me","Basics"],
-["❤️","Thank you very much","Dziękuję bardzo","jen-KOO-yeh BAR-dzoh","Thank you very much","Basics"],
+["👨","Man","mężczyzna","men-ZHCHIZ-nah","man"],
+["👩","Woman","kobieta","koh-BYEH-tah","woman"],
+["👦","Boy","chłopiec","HWOHP-yets","boy"],
+["👧","Girl","dziewczynka","jef-CHIN-kah","girl"],
+["👨‍👩‍👧","Family","rodzina","roh-JEE-nah","family"],
+["👩","Mother","mama","MAH-mah","mum"],
+["👨","Father","tata","TAH-tah","dad"],
+["👧","Daughter","córka","TSOOR-kah","daughter"],
+["👦","Son","syn","sin","son"],
+["👵","Grandmother","babcia","BAP-chah","grandmother"],
+["👴","Grandfather","dziadek","JAH-dek","grandfather"],
+["❤️","Wife","żona","ZHOH-nah","wife"],
+["❤️","Husband","mąż","monsh","husband"],
+["👩","Female partner","partnerka","part-NER-kah","female partner"],
+["👨","Male friend","przyjaciel","pzhih-YAH-chyel","male friend"],
+["👩","Female friend","przyjaciółka","pzhih-yah-CHOOW-kah","female friend"],
+["👶","Child","dziecko","JYEHTS-koh","child"],
+["👨‍👩‍👧","Parents","rodzice","roh-JEE-tseh","parents"],
+["👨","Brother","brat","braht","brother"],
+["👩","Sister","siostra","SHYOS-trah","sister"],
 
-["1️⃣","One","jeden","YEH-den","one","Numbers"],
-["2️⃣","Two","dwa","dvah","two","Numbers"],
-["3️⃣","Three","trzy","tshih","three","Numbers"],
-["4️⃣","Four","cztery","CHTEH-rih","four","Numbers"],
-["5️⃣","Five","pięć","pyench","five","Numbers"],
-["6️⃣","Six","sześć","sheshch","six","Numbers"],
-["7️⃣","Seven","siedem","SHYEH-dem","seven","Numbers"],
-["8️⃣","Eight","osiem","OH-shyem","eight","Numbers"],
-["9️⃣","Nine","dziewięć","JEV-yench","nine","Numbers"],
-["🔟","Ten","dziesięć","JESH-yench","ten","Numbers"],
+["🍞","Bread","chleb","hlep","bread"],
+["🥛","Milk","mleko","MLEH-koh","milk"],
+["🧀","Cheese","ser","sehr","cheese"],
+["🥩","Meat","mięso","MYEN-soh","meat"],
+["🍗","Chicken","kurczak","KOOR-chak","chicken"],
+["🐟","Fish","ryba","RIH-bah","fish"],
+["🥔","Potato","ziemniak","ZHEM-nyak","potato"],
+["🍎","Apple","jabłko","YABW-koh","apple"],
+["🍲","Soup","zupa","ZOO-pah","soup"],
+["🍳","Egg","jajko","YAI-koh","egg"],
+["🍚","Rice","ryż","rish","rice"],
+["🥗","Salad","sałatka","sah-WAHT-kah","salad"],
+["🍰","Cake","ciasto","CHAS-toh","cake"],
+["🍫","Chocolate","czekolada","cheh-koh-LAH-dah","chocolate"],
+["🍦","Ice cream","lody","LOH-dih","ice cream"],
+["☕","Coffee","kawa","KAH-vah","coffee"],
+["🍵","Tea","herbata","her-BAH-tah","tea"],
+["💧","Water","woda","VOH-dah","water"],
+["🧃","Juice","sok","sok","juice"],
+["🥤","Drink","napój","NAH-pooy","drink"],
 
-["🔢","Eleven","jedenaście","yeh-deh-NAH-shcheh","eleven","Numbers"],
-["🔢","Twelve","dwanaście","dvah-NAH-shcheh","twelve","Numbers"],
-["🔢","Thirteen","trzynaście","tshi-NAH-shcheh","thirteen","Numbers"],
-["🔢","Fourteen","czternaście","chtehr-NAH-shcheh","fourteen","Numbers"],
-["🔢","Fifteen","piętnaście","pyent-NAH-shcheh","fifteen","Numbers"],
-["🔢","Twenty","dwadzieścia","dvah-JESH-chah","twenty","Numbers"],
-["🔢","Thirty","trzydzieści","tshih-JESH-chee","thirty","Numbers"],
-["🔢","One hundred","sto","stoh","one hundred","Numbers"],
-["💷","How much?","Ile?","EE-leh","How much?","Numbers"],
-["🔢","A lot","dużo","DOO-zhoh","a lot / much","Numbers"],
+["🍽️","Menu","menu","MEH-noo","menu"],
+["🙏","Menu please","Poproszę menu","poh-PROH-sheh MEH-noo","The menu please"],
+["🍽️","I would like","Poproszę","poh-PROH-sheh","I would like / Please give me"],
+["💷","The bill please","Poproszę rachunek","poh-PROH-sheh rah-HOO-nek","The bill please"],
+["😋","Delicious","Pyszne","PISH-neh","Delicious"],
+["🍽️","Anything else?","Coś jeszcze?","tsosh YESH-cheh","Anything else?"],
+["❌","Without","Bez","bes","Without"],
+["🌶️","Spicy","Ostre","OS-treh","Spicy"],
+["🥤","A glass of water","Szklankę wody","SHKLANK-eh VOH-dih","A glass of water"],
+["☕","Coffee with milk","Kawa z mlekiem","KAH-vah z MLEH-kyem","Coffee with milk"],
 
-["👨","Man","mężczyzna","men-ZHCHIZ-nah","man","People"],
-["👩","Woman","kobieta","koh-BYEH-tah","woman","People"],
-["👦","Boy","chłopiec","HWOH-pyets","boy","People"],
-["👧","Girl","dziewczynka","jef-CHIN-kah","girl","People"],
-["👨‍👩‍👧","Family","rodzina","roh-JEE-nah","family","People"],
-["👩","Mother","mama","MAH-mah","mum","People"],
-["👨","Father","tata","TAH-tah","dad","People"],
-["👧","Daughter","córka","TSOOR-kah","daughter","People"],
-["👦","Son","syn","sin","son","People"],
-["👵","Grandmother","babcia","BAP-chah","grandmother","People"],
-
-["👴","Grandfather","dziadek","JAH-dek","grandfather","People"],
-["❤️","Wife","żona","ZHOH-nah","wife","People"],
-["❤️","Husband","mąż","monsh","husband","People"],
-["👩","Partner","partnerka","part-NER-kah","female partner","People"],
-["👨","Friend","przyjaciel","pzhih-YAH-chyel","male friend","People"],
-["👩","Friend","przyjaciółka","pzhih-yah-CHOOW-kah","female friend","People"],
-["👶","Child","dziecko","JYEHTS-koh","child","People"],
-["👨‍👩‍👧","Parents","rodzice","roh-JEE-tseh","parents","People"],
-["👨‍👩‍👧","Brother","brat","braht","brother","People"],
-["👩","Sister","siostra","SHYOS-trah","sister","People"],
-
-["🍞","Bread","chleb","hlep","bread","Food"],
-["🥛","Milk","mleko","MLEH-koh","milk","Food"],
-["🧀","Cheese","ser","sehr","cheese","Food"],
-["🥩","Meat","mięso","MYEN-soh","meat","Food"],
-["🍗","Chicken","kurczak","KOOR-chak","chicken","Food"],
-["🐟","Fish","ryba","RIH-bah","fish","Food"],
-["🥔","Potato","ziemniak","ZHEM-nyak","potato","Food"],
-["🍎","Apple","jabłko","YABW-koh","apple","Food"],
-["🍲","Soup","zupa","ZOO-pah","soup","Food"],
-["🍳","Egg","jajko","YAI-koh","egg","Food"],
-
-["🍚","Rice","ryż","rish","rice","Food"],
-["🥗","Salad","sałatka","sah-WAHT-kah","salad","Food"],
-["🍰","Cake","ciasto","CHAS-toh","cake","Food"],
-["🍫","Chocolate","czekolada","cheh-koh-LAH-dah","chocolate","Food"],
-["🍦","Ice cream","lody","LOH-dih","ice cream","Food"],
-["☕","Coffee","kawa","KAH-vah","coffee","Food"],
-["🍵","Tea","herbata","her-BAH-tah","tea","Food"],
-["💧","Water","woda","VOH-dah","water","Food"],
-["🧃","Juice","sok","sok","juice","Food"],
-["🥤","Drink","napój","NAH-pooy","drink","Food"],
-
-["🍽️","Menu","menu","MEH-noo","menu","Restaurant"],
-["🙏","Menu please","Poproszę menu","poh-PROH-sheh MEH-noo","The menu please","Restaurant"],
-["🍽️","I would like","Poproszę","poh-PROH-sheh","I would like / Please give me","Restaurant"],
-["💷","The bill please","Poproszę rachunek","poh-PROH-sheh rah-HOO-nek","The bill please","Restaurant"],
-["😋","Delicious","Pyszne","PISH-neh","Delicious","Restaurant"],
-["🍽️","Anything else?","Coś jeszcze?","tsosh YESH-cheh","Anything else?","Restaurant"],
-["❌","Without","Bez","bes","Without","Restaurant"],
-["🌶️","Spicy","Ostre","OS-treh","Spicy","Restaurant"],
-["🥤","A glass of water","Szklankę wody","SHKLANK-eh VOH-dih","A glass of water","Restaurant"],
-["☕","Coffee with milk","Kawa z mlekiem","KAH-vah z MLEH-kyem","Coffee with milk","Restaurant"],
-
-["🛒","Shop","sklep","sklep","shop","Shopping"],
-["💷","How much does it cost?","Ile to kosztuje?","EE-leh toh kosh-TOO-yeh","How much does it cost?","Shopping"],
-["💳","Card","karta","KAR-tah","card","Shopping"],
-["💵","Cash","gotówka","goh-TOOF-kah","cash","Shopping"],
-["🛍️","I want to buy","Chcę kupić","htseh KOO-pich","I want to buy","Shopping"],
-["📏","Bigger","większy","VYENK-shih","bigger","Shopping"],
-["📏","Smaller","mniejszy","MNYEY-shih","smaller","Shopping"],
-["👕","Size","rozmiar","ROHZ-myahr","size","Shopping"],
-["💷","Too expensive","Za drogie","zah DROH-gyeh","Too expensive","Shopping"],
-["👍","That's good","To jest dobre","to yest DOH-breh","That's good","Shopping"],
-
-["🚗","Where is...?","Gdzie jest...?","gjeh yest","Where is...?","Travel"],
-["🚻","Toilet","Toaleta","toh-ah-LEH-tah","toilet","Travel"],
-["🚉","Station","Stacja","STAH-tsya","station","Travel"],
-["🏨","Hotel","Hotel","HOH-tel","hotel","Travel"],
-["🚕","Taxi","Taksówka","tak-SOOF-kah","taxi","Travel"],
-["🛣️","Road","Droga","DROH-gah","road","Travel"],
-["⬅️","Left","Lewo","LEH-voh","left","Travel"],
-["➡️","Right","Prawo","PRAH-voh","right","Travel"],
-["⬆️","Straight ahead","Prosto","PROHS-toh","straight ahead","Travel"],
-["🚗","Where is the car?","Gdzie jest samochód?","gjeh yest sah-moh-HOOT","Where is the car?","Travel"],
-
-["🏠","Home","Dom","dom","home / house","Home"],
-["🚪","Door","Drzwi","jzhvee","door","Home"],
-["🪑","Chair","Krzesło","KZHEH-swoh","chair","Home"],
-["🛏️","Bed","Łóżko","WOOSH-koh","bed","Home"],
-["🍽️","Kitchen","Kuchnia","KOOH-nya","kitchen","Home"],
-["🚿","Bathroom","Łazienka","wah-ZHEN-kah","bathroom","Home"],
-["🛋️","Living room","Salon","SAH-lon","living room","Home"],
-["🪟","Window","Okno","OK-noh","window","Home"],
-["🔑","Key","Klucz","klooch","key","Home"],
-["🧹","Clean","Czysty","CHIS-tih","clean","Home"],
-
-["❤️","I love you","Kocham cię","KOH-ham chyeh","I love you","Everyday"],
-["😊","I miss you","Tęsknię za tobą","TENSK-nyeh zah TOH-bom","I miss you","Everyday"],
-["🥰","I like you","Lubię cię","LOO-byeh chyeh","I like you","Everyday"],
-["🙏","Can you help me?","Czy możesz mi pomóc?","chih MOH-zhesh mee POH-moots","Can you help me?","Everyday"],
-["📞","Call me","Zadzwoń do mnie","ZADZ-von doh MN-yeh","Call me","Everyday"],
-["⏰","Wait a moment","Poczekaj chwilę","poh-CHEH-kai HFEEL-eh","Wait a moment","Everyday"],
-["👍","See you soon","Do zobaczenia wkrótce","doh zah-BAH-cheh-nya FKRUT-tseh","See you soon","Everyday"],
-["☀️","Have a nice day","Miłego dnia","mee-WEH-goh DNYAH","Have a nice day","Everyday"],
-["❤️","I am happy","Jestem szczęśliwy","YES-tem shchen-SHLEE-vih","I am happy","Everyday"],
-["❤️","I am happy with you","Jestem szczęśliwy z tobą","YES-tem shchen-SHLEE-vih z TOH-bom","I am happy with you","Everyday"]
-
-];
-
-
-/* =========================================================
-   CONVERSATIONS
-   ========================================================= */
-
-const conversations=[
-
-{
-title:"☕ At the Café",
-lines:[
-["Barista","Dzień dobry! Co podać?","Hello! What can I get you?"],
-["You","Poproszę kawę z mlekiem.","I'd like a coffee with milk."],
-["Barista","Oczywiście.","Of course."],
-["You","Dziękuję.","Thank you."]
-]
-},
-
-{
-title:"🍽️ At a Restaurant",
-lines:[
-["Waiter","Dzień dobry. Co podać?","Hello. What can I get you?"],
-["You","Poproszę zupę i wodę.","I'd like soup and water."],
-["Waiter","Coś jeszcze?","Anything else?"],
-["You","Nie, dziękuję.","No, thank you."]
-]
-},
-
-{
-title:"🛒 In a Shop",
-lines:[
-["Assistant","Dzień dobry. W czym mogę pomóc?","Hello. How can I help?"],
-["You","Chcę kupić koszulę.","I want to buy a shirt."],
-["Assistant","Jaki rozmiar?","What size?"],
-["You","Poproszę większy rozmiar.","A bigger size, please."]
-]
-},
-
-{
-title:"👋 Meeting Someone",
-lines:[
-["Anna","Cześć! Jak się masz?","Hi! How are you?"],
-["You","Dobrze, dziękuję. A ty?","Good, thank you. And you?"],
-["Anna","Też dobrze!","Good too!"],
-["You","Miło cię widzieć.","Nice to see you."]
-]
-},
-
-{
-title:"🏠 At Home",
-lines:[
-["Anna","Co robisz?","What are you doing?"],
-["You","Wracam do domu.","I'm coming home."],
-["Anna","Dobrze.","Okay."],
-["You","Do zobaczenia później.","See you later."]
-]
-},
-
-{
-title:"🚗 Asking for Directions",
-lines:[
-["You","Przepraszam, gdzie jest stacja?","Excuse me, where is the station?"],
-["Person","Prosto, potem w lewo.","Straight ahead, then left."],
-["You","Dziękuję bardzo.","Thank you very much."],
-["Person","Proszę bardzo.","You're welcome."]
-]
-},
-
-{
-title:"🏨 At a Hotel",
-lines:[
-["Receptionist","Dzień dobry. W czym mogę pomóc?","Hello. How can I help?"],
-["You","Mam rezerwację.","I have a reservation."],
-["Receptionist","Na jakie nazwisko?","Under what name?"],
-["You","Na nazwisko Whitcher.","The name is Whitcher."]
-]
-},
-
-{
-title:"❤️ With Someone You Love",
-lines:[
-["Anna","Tęsknię za tobą.","I miss you."],
-["You","Ja też. Kocham cię.","Me too. I love you."],
-["Anna","Naprawdę?","Really?"],
-["You","Tak, bardzo.","Yes, very much."]
-]
-},
-
-{
-title:"📞 On the Phone",
-lines:[
-["You","Cześć, gdzie jesteś?","Hi, where are you?"],
-["Anna","Jestem w domu.","I'm at home."],
-["You","Dobrze. Zadzwonię później.","Okay. I'll call later."],
-["Anna","Dobrze, do usłyszenia.","Okay, speak to you later."]
-]
-},
-
-{
-title:"🛍️ Buying Something",
-lines:[
-["You","Ile to kosztuje?","How much does this cost?"],
-["Assistant","Sto złotych.","One hundred zloty."],
-["You","Czy mogę zapłacić kartą?","Can I pay by card?"],
-["Assistant","Tak, oczywiście.","Yes, of course."]
-]
-}
+["🛒","Shop","sklep","sklep","shop"],
+["💷","How much does it cost?","Ile to kosztuje?","EE-leh toh kosh-TOO-yeh","How much does it cost?"],
+["💳","Card","karta","KAR-tah","card"],
+["💵","Cash","gotówka","goh-TOOF-kah","cash"],
+["🛍️","I want to buy","Chcę kupić","htseh KOO-pich","I want to buy"],
+["📏","Bigger","większy","VYENK-shih","bigger"],
+["📏","Smaller","mniejszy","MNYEY-shih","smaller"],
+["👕","Size","rozmiar","ROHZ-myahr","size"],
+["🚗","Where is...?","Gdzie jest...?","gjeh yest","Where is...?"]
 
 ];
 
@@ -975,417 +723,79 @@ lines:[
    STATE
    ========================================================= */
 
-const defaultState={
-done:[],
-xp:0,
-answers:0,
-streak:1,
-mistakes:[],
-conversations:0,
-listening:0
+const defaultState = {
+  currentDay:1,
+  completedDays:[],
+  learned:[],
+  xp:0,
+  streak:0,
+  lastCompleted:"",
+  mistakes:[],
+  quizCorrect:0,
+  listening:0,
+  speaking:0
 };
 
-let state=loadState();
-
-let currentLesson=0;
-let quizQuestion=0;
-let quizAnswered=false;
-let currentCategory="All";
-
-let listeningLesson=0;
-let listeningAnswered=false;
-
-
-/* =========================================================
-   LOAD / SAVE
-   ========================================================= */
+let state = loadState();
 
 function loadState(){
-
-try{
-
-const saved=
-localStorage.getItem("polishBuddyV4");
-
-if(saved){
-
-const data=JSON.parse(saved);
-
-return {
-...defaultState,
-...data
-};
-
+  try{
+    const saved=localStorage.getItem("polishBuddyV5");
+    if(saved){
+      return {...defaultState,...JSON.parse(saved)};
+    }
+  }catch(e){
+    console.log("Storage unavailable",e);
+  }
+  return {...defaultState};
 }
-
-}catch(e){
-
-console.log(e);
-
-}
-
-return {
-...defaultState,
-done:[],
-mistakes:[]
-};
-
-}
-
 
 function saveState(){
-
-try{
-
-localStorage.setItem(
-"polishBuddyV4",
-JSON.stringify(state)
-);
-
-}catch(e){
-
-console.log(e);
-
-}
-
-updateUI();
-
+  try{
+    localStorage.setItem("polishBuddyV5",JSON.stringify(state));
+  }catch(e){
+    console.log("Could not save",e);
+  }
+  updateUI();
 }
 
 
 /* =========================================================
-   BASIC HELPERS
+   NAVIGATION
    ========================================================= */
 
-function $(id){
-return document.getElementById(id);
+function showSection(section){
+
+  document.querySelectorAll("main section").forEach(s=>{
+    s.classList.add("hidden");
+  });
+
+  document.getElementById(section).classList.remove("hidden");
+
+  document.querySelectorAll(".nav button").forEach(b=>{
+    b.classList.remove("active");
+  });
+
+  const navMap={
+    home:"navHome",
+    learn:"navLearn",
+    speak:"navSpeak",
+    listen:"navListen",
+    progress:"navProgress"
+  };
+
+  if(navMap[section]){
+    document.getElementById(navMap[section]).classList.add("active");
+  }
+
+  if(section==="home") updateHome();
+  if(section==="progress") updateProgress();
+  if(section==="speak") setupSpeaking();
 }
 
-
-function escapeHTML(text){
-
-return String(text)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
-}
-
-
-/* =========================================================
-   UI UPDATE
-   ========================================================= */
-
-function updateUI(){
-
-const percent=
-Math.round(
-(state.done.length/lessons.length)*100
-);
-
-$("progressBar").style.width=
-percent+"%";
-
-$("progressPercent").textContent=
-percent+"%";
-
-$("completedCount").textContent=
-state.done.length;
-
-$("xp").textContent=
-state.xp+" XP";
-
-const level=
-Math.floor(state.xp/100)+1;
-
-$("level").textContent=
-level;
-
-$("streak").textContent=
-state.streak;
-
-$("statXP").textContent=
-state.xp;
-
-$("statLevel").textContent=
-level;
-
-$("statLessons").textContent=
-state.done.length;
-
-$("statAnswers").textContent=
-state.answers;
-
-if(state.mistakes.length){
-
-$("mistakeList").textContent=
-state.mistakes
-.slice(-10)
-.join(" • ");
-
-}else{
-
-$("mistakeList").textContent=
-"No mistakes yet. Great start!";
-
-}
-
-renderAchievements();
-
-}
-
-
-/* =========================================================
-   SECTION NAVIGATION
-   ========================================================= */
-
-function hideAllSections(){
-
-[
-"home",
-"lesson",
-"quiz",
-"conversations",
-"conversation",
-"listening",
-"achievements"
-
-].forEach(id=>{
-$(id).classList.add("hidden");
-});
-
-}
-
-
-function showSection(id){
-
-hideAllSections();
-
-$(id).classList.remove("hidden");
-
-window.scrollTo(0,0);
-
-}
-
-
-function navigate(id,button){
-
-showSection(id);
-
-document
-.querySelectorAll(".nav button")
-.forEach(b=>{
-b.classList.remove("active");
-});
-
-button.classList.add("active");
-
-if(id==="conversations"){
-renderConversations();
-}
-
-if(id==="listening"){
-newListening();
-}
-
-if(id==="achievements"){
-updateUI();
-}
-
-}
-
-
-function goHome(){
-
-showSection("home");
-
-document
-.querySelectorAll(".nav button")
-.forEach(b=>{
-b.classList.remove("active");
-});
-
-document
-.querySelector(".nav button")
-.classList.add("active");
-
-renderLessons();
-updateUI();
-
-}
-
-
-/* =========================================================
-   LESSON LIST
-   ========================================================= */
-
-const categories=[
-"All",
-"Basics",
-"Numbers",
-"People",
-"Food",
-"Restaurant",
-"Shopping",
-"Travel",
-"Home",
-"Everyday"
-];
-
-
-function renderCategories(){
-
-$("categoryTabs").innerHTML=
-categories.map(category=>`
-
-<button
-class="${currentCategory===category?"active":""}"
-onclick="changeCategory('${category}')">
-
-${category}
-
-</button>
-
-`).join("");
-
-}
-
-
-function changeCategory(category){
-
-currentCategory=category;
-
-renderLessons();
-
-}
-
-
-function renderLessons(){
-
-renderCategories();
-
-const filtered=
-lessons
-.map((lesson,index)=>({
-lesson,
-index
-}))
-.filter(item=>
-currentCategory==="All" ||
-item.lesson[5]===currentCategory
-);
-
-
-if(!filtered.length){
-
-$("lessonList").innerHTML=
-'<div class="empty">No lessons found.</div>';
-
-return;
-
-}
-
-
-$("lessonList").innerHTML=
-filtered.map(item=>{
-
-const l=item.lesson;
-const i=item.index;
-
-return `
-
-<div
-class="lesson"
-onclick="openLesson(${i})">
-
-<div class="ico">
-${l[0]}
-</div>
-
-<div class="lesson-info">
-
-<b>
-${i+1}. ${escapeHTML(l[1])}
-</b>
-
-<small>
-${escapeHTML(l[2])}
-—
-${escapeHTML(l[4])}
-</small>
-
-</div>
-
-<div class="tick">
-
-${
-state.done.includes(i)
-?
-"✅"
-:
-"›"
-}
-
-</div>
-
-</div>
-
-`;
-
-}).join("");
-
-}
-
-
-/* =========================================================
-   NEXT LESSON
-   ========================================================= */
-
-function getNextLesson(){
-
-for(let i=0;i<lessons.length;i++){
-
-if(!state.done.includes(i)){
-return i;
-}
-
-}
-
-return 0;
-
-}
-
-
-/* =========================================================
-   OPEN LESSON
-   ========================================================= */
-
-function openLesson(index){
-
-currentLesson=index;
-
-const lesson=
-lessons[index];
-
-$("lessonNumber").textContent=
-`Lesson ${index+1} of ${lessons.length}`;
-
-$("lessonTitle").textContent=
-lesson[1];
-
-$("polishWord").textContent=
-lesson[2];
-
-$("pronunciation").textContent=
-lesson[3];
-
-$("meaning").textContent=
-lesson[4];
-
-showSection("lesson");
-
+function openToday(){
+  setupLesson(state.currentDay);
+  showSection("learn");
 }
 
 
@@ -1393,40 +803,189 @@ showSection("lesson");
    SPEECH
    ========================================================= */
 
-function speakText(text){
+function speakText(text,slow=false){
 
-if("speechSynthesis" in window){
+  if(!("speechSynthesis" in window)){
+    alert("Your phone does not support Polish speech in this browser.");
+    return;
+  }
 
-const utterance=
-new SpeechSynthesisUtterance(text);
+  window.speechSynthesis.cancel();
 
-utterance.lang="pl-PL";
+  const utterance=new SpeechSynthesisUtterance(text);
+  utterance.lang="pl-PL";
+  utterance.rate=slow ? 0.48 : 0.78;
+  utterance.pitch=1;
 
-utterance.rate=.78;
-
-speechSynthesis.cancel();
-
-speechSynthesis.speak(
-utterance
-);
-
-}else{
-
-alert(
-"Polish speech is not available in this browser."
-);
-
+  window.speechSynthesis.speak(utterance);
 }
-
-}
-
 
 function speakCurrent(){
+  const lesson=lessons[state.currentDay-1];
+  speakText(lesson[2],false);
+}
 
-speakText(
-lessons[currentLesson][2]
-);
+function speakSlow(){
+  const lesson=lessons[state.currentDay-1];
+  speakText(lesson[2],true);
+}
 
+
+/* =========================================================
+   LESSON
+   ========================================================= */
+
+function setupLesson(day){
+
+  if(day<1) day=1;
+  if(day>lessons.length) day=lessons.length;
+
+  state.currentDay=day;
+
+  const l=lessons[day-1];
+
+  document.getElementById("lessonDay").textContent="DAY "+day;
+  document.getElementById("lessonTitle").textContent=l[0]+" "+l[1];
+  document.getElementById("lessonPolish").textContent=l[2];
+  document.getElementById("lessonPronunciation").textContent=l[3];
+  document.getElementById("lessonMeaning").textContent=l[4];
+
+  const learned=state.learned.includes(day);
+
+  document.getElementById("learnButton").disabled=learned;
+  document.getElementById("learnButton").textContent=
+    learned ? "✅ Learned" : "✅ I've Learned This";
+
+  document.getElementById("learnStatus").textContent=
+    learned ? "You have already learned today's phrase." : "";
+
+  setupReviews(day);
+  setupConversation(day);
+}
+
+function markLearned(){
+
+  const day=state.currentDay;
+
+  if(!state.learned.includes(day)){
+    state.learned.push(day);
+    state.xp+=10;
+  }
+
+  saveState();
+
+  document.getElementById("learnButton").disabled=true;
+  document.getElementById("learnButton").textContent="✅ Learned";
+  document.getElementById("learnStatus").textContent=
+    "+10 XP — Great job!";
+
+}
+
+
+/* =========================================================
+   REVIEW
+   ========================================================= */
+
+function setupReviews(day){
+
+  const box=document.getElementById("reviewPhrases");
+  box.innerHTML="";
+
+  const reviews=[];
+
+  if(day>1) reviews.push(day-1);
+  if(day>2) reviews.push(day-2);
+
+  if(reviews.length===0){
+    box.innerHTML="<p>🎉 This is your first lesson. Tomorrow you'll start reviewing previous phrases.</p>";
+    return;
+  }
+
+  reviews.forEach(n=>{
+
+    const l=lessons[n-1];
+
+    const div=document.createElement("div");
+    div.className="phrase-box";
+
+    div.innerHTML=`
+      <div class="small-polish">${l[0]} ${l[2]}</div>
+      <div class="small-pron">🗣️ ${l[3]}</div>
+      <div>${l[4]}</div>
+      <button class="secondary" onclick="speakText('${escapeSpeech(l[2])}')">
+        🔊 Hear
+      </button>
+    `;
+
+    box.appendChild(div);
+  });
+}
+
+function escapeSpeech(text){
+  return text.replace(/'/g,"\\'");
+}
+
+
+/* =========================================================
+   CONVERSATION
+   ========================================================= */
+
+function setupConversation(day){
+
+  const l=lessons[day-1];
+
+  const box=document.getElementById("conversation");
+
+  let partner="Dzień dobry!";
+  let you=l[2];
+
+  if(day===1){
+    partner="Dzień dobry!";
+    you="Dzień dobry!";
+  }
+
+  if(day===2){
+    partner="Cześć!";
+    you="Cześć!";
+  }
+
+  if(day===3){
+    partner="Do widzenia!";
+    you="Do widzenia!";
+  }
+
+  if(day===4){
+    partner="Dobranoc!";
+    you="Dobranoc!";
+  }
+
+  if(day===5){
+    partner="Dziękuję!";
+    you="Proszę!";
+  }
+
+  if(day===6){
+    partner="Proszę.";
+    you="Dziękuję.";
+  }
+
+  box.innerHTML=`
+    <div class="phrase-box">
+      <strong>👤 Person:</strong>
+      <p>${partner}</p>
+      <button class="secondary" onclick="speakText('${escapeSpeech(partner)}')">
+        🔊 Hear
+      </button>
+    </div>
+
+    <div class="phrase-box">
+      <strong>🗣️ You:</strong>
+      <p>${you}</p>
+      <button class="secondary" onclick="speakText('${escapeSpeech(you)}')">
+        🔊 Hear
+      </button>
+    </div>
+  `;
 }
 
 
@@ -1434,313 +993,231 @@ lessons[currentLesson][2]
    QUIZ
    ========================================================= */
 
+let quizQuestions=[];
+let quizIndex=0;
+let quizScore=0;
+
 function startQuiz(){
 
-quizQuestion=0;
+  const day=state.currentDay;
+  const current=lessons[day-1];
 
-quizAnswered=false;
+  quizQuestions=[];
 
-buildQuizQuestion();
+  quizQuestions.push({
+    question:`What does "${current[2]}" mean?`,
+    answer:current[4],
+    options:makeOptions(current[4],day)
+  });
 
-showSection("quiz");
+  quizQuestions.push({
+    question:`How do you say "${current[4]}"?`,
+    answer:current[2],
+    options:makeOptions(current[2],day)
+  });
 
+  const previous=day>1 ? lessons[day-2] : lessons[1];
+
+  quizQuestions.push({
+    question:`What does "${previous[2]}" mean?`,
+    answer:previous[4],
+    options:makeOptions(previous[4],day-1)
+  });
+
+  quizQuestions.push({
+    question:`Which pronunciation is correct for "${current[2]}"?`,
+    answer:current[3],
+    options:makeOptions(current[3],day)
+  });
+
+  quizQuestions.push({
+    question:`Which Polish phrase means "${previous[4]}"?`,
+    answer:previous[2],
+    options:makeOptions(previous[2],day-1)
+  });
+
+  quizIndex=0;
+  quizScore=0;
+
+  showSection("quiz");
+  showQuizQuestion();
 }
 
+function makeOptions(correct,day){
 
-function buildQuizQuestion(){
+  const options=[correct];
 
-const lesson=
-lessons[currentLesson];
+  const candidates=[];
 
-const polishToEnglish=
-quizQuestion%2===0;
+  lessons.forEach((l,i)=>{
+    if(i!==day-1){
+      candidates.push(l[2]);
+      candidates.push(l[4]);
+      candidates.push(l[3]);
+    }
+  });
 
-const correct=
-polishToEnglish
-?
-lesson[4]
-:
-lesson[2];
+  while(options.length<4){
 
-$("quizNumber").textContent=
-`Question ${quizQuestion+1} of 3`;
+    const item=candidates[Math.floor(Math.random()*candidates.length)];
 
+    if(!options.includes(item)){
+      options.push(item);
+    }
+  }
 
-$("quizQuestion").textContent=
-polishToEnglish
-?
-`What does "${lesson[2]}" mean?`
-:
-`Which Polish word or phrase means "${lesson[4]}"?`;
-
-
-const answers=[correct];
-
-
-while(answers.length<4){
-
-const random=
-lessons[
-Math.floor(
-Math.random()*lessons.length
-)
-];
-
-const value=
-polishToEnglish
-?
-random[4]
-:
-random[2];
-
-if(!answers.includes(value)){
-answers.push(value);
+  return shuffle(options);
 }
 
+function shuffle(array){
+  return array.sort(()=>Math.random()-.5);
 }
 
+function showQuizQuestion(){
 
-answers.sort(
-()=>Math.random()-.5
-);
+  const q=quizQuestions[quizIndex];
 
+  document.getElementById("quizTitle").textContent=
+    `Question ${quizIndex+1} of ${quizQuestions.length}`;
 
-$("quizAnswers").innerHTML=
-answers.map((answer,index)=>`
+  document.getElementById("quizQuestion").innerHTML=
+    `<h3>${q.question}</h3>`;
 
-<button
-class="btn"
-data-answer="${escapeHTML(answer)}"
-onclick="answerQuiz(this)">
+  const options=document.getElementById("quizOptions");
+  options.innerHTML="";
 
-<span class="answer-letter">
-${String.fromCharCode(65+index)}.
-</span>
+  q.options.forEach(option=>{
 
-${escapeHTML(answer)}
+    const button=document.createElement("button");
+    button.className="quiz-option";
+    button.textContent=option;
 
-</button>
+    button.onclick=()=>answerQuiz(button,option);
 
-`).join("");
+    options.appendChild(button);
+  });
 
-
-$("quizFeedback").innerHTML="";
-
-$("quizFeedback").className="";
-
-$("nextQuiz").classList.add("hidden");
-
-$("nextQuiz").textContent=
-quizQuestion===2
-?
-"Finish Lesson ✓"
-:
-"Next Question →";
-
+  document.getElementById("quizResult").innerHTML="";
 }
 
+function answerQuiz(button,answer){
 
-function answerQuiz(button){
+  const q=quizQuestions[quizIndex];
 
-if(quizAnswered){
-return;
+  document.querySelectorAll(".quiz-option").forEach(b=>{
+    b.disabled=true;
+  });
+
+  if(answer===q.answer){
+
+    button.classList.add("correct");
+    quizScore++;
+    state.quizCorrect++;
+    state.xp+=10;
+
+    document.getElementById("quizResult").innerHTML=
+      `<div class="result success">✅ Correct! +10 XP</div>`;
+
+  }else{
+
+    button.classList.add("wrong");
+
+    state.mistakes.push({
+      day:state.currentDay,
+      question:q.question,
+      answer:q.answer
+    });
+
+    document.getElementById("quizResult").innerHTML=
+      `<div class="result fail">❌ Not quite.<br>Correct answer: ${q.answer}</div>`;
+  }
+
+  saveState();
+
+  setTimeout(()=>{
+
+    quizIndex++;
+
+    if(quizIndex<quizQuestions.length){
+      showQuizQuestion();
+    }else{
+      finishQuiz();
+    }
+
+  },1100);
 }
 
-quizAnswered=true;
+function finishQuiz(){
 
-const lesson=
-lessons[currentLesson];
+  const bonus=20;
 
-const polishToEnglish=
-quizQuestion%2===0;
+  state.xp+=bonus;
 
-const correct=
-polishToEnglish
-?
-lesson[4]
-:
-lesson[2];
+  if(!state.completedDays.includes(state.currentDay)){
 
-const selected=
-button.getAttribute("data-answer");
+    state.completedDays.push(state.currentDay);
 
+    updateStreak();
 
-document
-.querySelectorAll("#quizAnswers .btn")
-.forEach(btn=>{
-btn.disabled=true;
-});
+    if(state.currentDay<lessons.length){
+      state.currentDay++;
+    }
+  }
 
+  saveState();
 
-if(selected===correct){
+  document.getElementById("quizQuestion").innerHTML=`
+    <div class="center">
+      <div class="big-emoji">🎉</div>
+      <h2>Lesson Complete!</h2>
+      <p>You scored <strong>${quizScore}/5</strong></p>
+      <p class="xp">+${bonus} bonus XP</p>
+    </div>
+  `;
 
-button.classList.add("correct");
+  document.getElementById("quizOptions").innerHTML=`
+    <button class="primary" onclick="showSection('home')">
+      🏠 Back Home
+    </button>
+  `;
 
-$("quizFeedback").className=
-"feedback ok";
-
-$("quizFeedback").textContent=
-"✓ Correct! +10 XP";
-
-state.xp+=10;
-
-}else{
-
-button.classList.add("wrong");
-
-$("quizFeedback").className=
-"feedback bad";
-
-$("quizFeedback").textContent=
-"Not quite. The correct answer is: "+
-correct;
-
-state.mistakes.push(
-lesson[2]
-);
-
-}
-
-
-state.answers++;
-
-
-if(
-quizQuestion===2 &&
-!state.done.includes(currentLesson)
-){
-
-state.done.push(currentLesson);
-
-state.xp+=20;
-
-}
-
-
-saveState();
-
-$("nextQuiz").classList.remove("hidden");
-
-}
-
-
-function nextQuizQuestion(){
-
-if(!quizAnswered){
-return;
-}
-
-if(quizQuestion<2){
-
-quizQuestion++;
-
-quizAnswered=false;
-
-buildQuizQuestion();
-
-}else{
-
-goHome();
-
-}
-
+  document.getElementById("quizResult").innerHTML="";
 }
 
 
 /* =========================================================
-   CONVERSATIONS
+   STREAK
    ========================================================= */
 
-function renderConversations(){
+function updateStreak(){
 
-$("conversationList").innerHTML=
-conversations.map((conversation,index)=>`
+  const today=new Date().toDateString();
 
-<div
-class="conv"
-onclick="openConversation(${index})">
+  if(state.lastCompleted===today){
+    return;
+  }
 
-<h3>
-${conversation.title}
-</h3>
+  if(!state.lastCompleted){
+    state.streak=1;
+  }else{
 
-<p>
-${conversation.lines[0][1]}
-</p>
+    const last=new Date(state.lastCompleted);
+    const now=new Date();
 
-<div class="small-note">
-Tap to practise →
-</div>
+    const diff=Math.floor(
+      (new Date(now.toDateString())-
+      new Date(last.toDateString()))/
+      86400000
+    );
 
-</div>
+    if(diff===1){
+      state.streak++;
+    }else if(diff>1){
+      state.streak=1;
+    }
+  }
 
-`).join("");
-
-}
-
-
-function openConversation(index){
-
-const conversation=
-conversations[index];
-
-$("conversationTitle").textContent=
-conversation.title;
-
-$("conversationBody").innerHTML=
-conversation.lines.map(line=>`
-
-<div class="bubble ${line[0]==="You"?"you":""}">
-
-<small>
-${line[0]}
-</small>
-
-<b>
-${escapeHTML(line[1])}
-</b>
-
-<br>
-
-<span>
-${escapeHTML(line[2])}
-</span>
-
-</div>
-
-`).join("");
-
-state.conversations++;
-
-state.xp+=5;
-
-saveState();
-
-showSection("conversation");
-
-}
-
-
-function hearConversation(){
-
-const conversation=
-conversations.find(
-(c)=>
-c.title===
-$("conversationTitle").textContent
-);
-
-if(!conversation){
-return;
-}
-
-const text=
-conversation.lines
-.map(line=>line[1])
-.join(". ");
-
-speakText(text);
-
+  state.lastCompleted=today;
 }
 
 
@@ -1748,271 +1225,423 @@ speakText(text);
    LISTENING
    ========================================================= */
 
-function newListening(){
+let listeningLesson=null;
+let listeningAnswered=false;
 
-listeningLesson=
-Math.floor(
-Math.random()*lessons.length
-);
+function startListening(){
 
-listeningAnswered=false;
+  listeningLesson=
+    lessons[Math.floor(Math.random()*Math.min(state.currentDay,lessons.length))];
 
-const lesson=
-lessons[listeningLesson];
+  listeningAnswered=false;
 
-const correct=
-lesson[4];
+  document.getElementById("listenGame").classList.remove("hidden");
 
-const answers=[correct];
+  document.getElementById("listenPhrase").textContent="🔊";
 
+  document.getElementById("listenResult").innerHTML="";
 
-while(answers.length<4){
+  const optionsBox=document.getElementById("listenOptions");
+  optionsBox.innerHTML="";
 
-const random=
-lessons[
-Math.floor(
-Math.random()*lessons.length
-)
-][4];
+  const correct=listeningLesson[4];
 
-if(!answers.includes(random)){
-answers.push(random);
+  const opts=makeOptions(correct,lessons.indexOf(listeningLesson)+1);
+
+  opts.forEach(option=>{
+    const b=document.createElement("button");
+    b.className="quiz-option";
+    b.textContent=option;
+
+    b.onclick=()=>answerListening(b,option);
+
+    optionsBox.appendChild(b);
+  });
+
+  setTimeout(()=>{
+    speakText(listeningLesson[2],false);
+  },300);
 }
 
+function repeatListening(){
+  if(listeningLesson){
+    speakText(listeningLesson[2],false);
+  }
 }
 
+function answerListening(button,answer){
 
-answers.sort(
-()=>Math.random()-.5
-);
+  if(listeningAnswered)return;
 
+  listeningAnswered=true;
 
-$("listeningPrompt").innerHTML=
-"🔊 Press <b>Play Polish</b>, listen carefully, then choose the English meaning.";
+  document.querySelectorAll("#listenOptions button").forEach(b=>{
+    b.disabled=true;
+  });
 
-$("listeningAnswers").innerHTML=
-answers.map(answer=>`
+  if(answer===listeningLesson[4]){
 
-<button
-class="btn"
-data-answer="${escapeHTML(answer)}"
-onclick="answerListening(this)">
+    button.classList.add("correct");
 
-${escapeHTML(answer)}
+    state.xp+=10;
+    state.listening++;
 
-</button>
+    document.getElementById("listenResult").innerHTML=
+      `<div class="result success">✅ Correct! +10 XP</div>`;
 
-`).join("");
+  }else{
 
-$("listeningFeedback").innerHTML="";
+    button.classList.add("wrong");
 
-$("listeningFeedback").className="";
+    document.getElementById("listenResult").innerHTML=
+      `<div class="result fail">
+        ❌ The answer was:<br>
+        ${listeningLesson[4]}
+      </div>`;
+  }
 
-$("nextListening").classList.add("hidden");
-
-}
-
-
-function playListening(){
-
-const lesson=
-lessons[listeningLesson];
-
-speakText(
-lesson[2]
-);
-
-}
-
-
-function answerListening(button){
-
-if(listeningAnswered){
-return;
-}
-
-listeningAnswered=true;
-
-const correct=
-lessons[listeningLesson][4];
-
-const selected=
-button.getAttribute("data-answer");
-
-
-document
-.querySelectorAll("#listeningAnswers .btn")
-.forEach(btn=>{
-btn.disabled=true;
-});
-
-
-if(selected===correct){
-
-button.classList.add("correct");
-
-$("listeningFeedback").className=
-"feedback ok";
-
-$("listeningFeedback").textContent=
-"✓ Correct! +10 XP";
-
-state.xp+=10;
-
-}else{
-
-button.classList.add("wrong");
-
-$("listeningFeedback").className=
-"feedback bad";
-
-$("listeningFeedback").textContent=
-"The correct answer is: "+
-correct;
-
-}
-
-
-state.listening++;
-
-saveState();
-
-$("nextListening")
-.classList.remove("hidden");
-
+  saveState();
 }
 
 
 /* =========================================================
-   ACHIEVEMENTS
+   SPEAKING
    ========================================================= */
 
-function renderAchievements(){
+let speakingLesson=null;
 
-const achievements=[
+function setupSpeaking(){
 
-[
-"🌱",
-"First Steps",
-"Complete 1 lesson",
-state.done.length>=1
-],
+  const max=Math.max(1,state.currentDay);
 
-[
-"📖",
-"Getting Started",
-"Complete 5 lessons",
-state.done.length>=5
-],
+  speakingLesson=
+    lessons[Math.floor(Math.random()*max)];
 
-[
-"📚",
-"Bookworm",
-"Complete 10 lessons",
-state.done.length>=10
-],
+  document.getElementById("speakPolish").textContent=
+    speakingLesson[2];
 
-[
-"🇵🇱",
-"Polish Starter",
-"Complete 25 lessons",
-state.done.length>=25
-],
+  document.getElementById("speakPronunciation").textContent=
+    "🗣️ "+speakingLesson[3];
 
-[
-"🏅",
-"Polish Learner",
-"Complete 50 lessons",
-state.done.length>=50
-],
+  document.getElementById("speechStatus").textContent="";
 
-[
-"🎓",
-"Beginner Graduate",
-"Complete all 100 lessons",
-state.done.length>=100
-],
+  document.getElementById("speakingAnswer").classList.add("hidden");
+}
 
-[
-"⭐",
-"100 XP",
-"Earn 100 XP",
-state.xp>=100
-],
+function speakPractice(){
 
-[
-"🌟",
-"500 XP",
-"Earn 500 XP",
-state.xp>=500
-],
+  if(speakingLesson){
+    speakText(speakingLesson[2],true);
+  }
+}
 
-[
-"💫",
-"1000 XP",
-"Earn 1000 XP",
-state.xp>=1000
-],
+function showSpeakingAnswer(){
 
-[
-"🧠",
-"Quiz Starter",
-"Answer 10 questions",
-state.answers>=10
-],
+  if(!speakingLesson)return;
 
-[
-"🏆",
-"Quiz Master",
-"Answer 50 questions",
-state.answers>=50
-],
+  document.getElementById("speakingAnswer").classList.remove("hidden");
 
-[
-"💬",
-"Conversation Starter",
-"Practise 3 conversations",
-state.conversations>=3
-],
+  document.getElementById("speakingAnswer").innerHTML=`
+    <div class="result success">
+      🇵🇱 ${speakingLesson[2]}<br>
+      🗣️ ${speakingLesson[3]}<br>
+      🇬🇧 ${speakingLesson[4]}
+    </div>
+  `;
+}
 
-[
-"🎧",
-"Good Listener",
-"Complete 10 listening exercises",
-state.listening>=10
-],
+function trySpeaking(){
 
-[
-"🔥",
-"Keep Going",
-"Reach a 7-day streak",
-state.streak>=7
-]
+  const Recognition=
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
 
-];
+  if(!Recognition){
+
+    document.getElementById("speechStatus").innerHTML=
+      "🎤 Speech recognition isn't available on this iPhone browser.<br><br>Say it aloud yourself, then tap Show Answer to check it.";
+
+    return;
+  }
+
+  const recognition=new Recognition();
+
+  recognition.lang="pl-PL";
+  recognition.interimResults=false;
+  recognition.maxAlternatives=1;
+
+  document.getElementById("speechStatus").textContent=
+    "🎤 Listening...";
+
+  recognition.start();
+
+  recognition.onresult=function(event){
+
+    const spoken=event.results[0][0].transcript;
+
+    document.getElementById("speechStatus").innerHTML=
+      `You said:<br><strong>${spoken}</strong><br><br>
+       Compare it with:<br><strong>${speakingLesson[2]}</strong>`;
+
+    state.speaking++;
+    state.xp+=5;
+
+    saveState();
+  };
+
+  recognition.onerror=function(){
+
+    document.getElementById("speechStatus").textContent=
+      "I couldn't hear that clearly. Try again.";
+  };
+}
 
 
-$("achievementList").innerHTML=
-achievements.map(a=>`
+/* =========================================================
+   HOME
+   ========================================================= */
 
-<div class="badge ${a[3]?"":"locked"}">
+function updateHome(){
 
-${a[0]}
+  document.getElementById("homeDay").textContent=
+    state.currentDay<=lessons.length
+      ? `Day ${state.currentDay} of ${lessons.length}`
+      : "Course Complete! 🎉";
 
-<b>${a[1]}</b>
+  document.getElementById("xpStat").textContent=state.xp;
+  document.getElementById("streakStat").textContent=state.streak;
+  document.getElementById("doneStat").textContent=state.completedDays.length;
 
-<br>
+  const percentage=
+    Math.round((state.completedDays.length/lessons.length)*100);
 
-${a[2]}
+  document.getElementById("mainProgress").style.width=
+    percentage+"%";
 
-<br>
+  buildDayGrid();
+  updateLevel();
+}
 
-${a[3]?"✅ Unlocked":"🔒 Locked"}
+function buildDayGrid(){
 
-</div>
+  const box=document.getElementById("homeDays");
+  box.innerHTML="";
 
-`).join("");
+  for(let i=1;i<=lessons.length;i++){
 
+    const button=document.createElement("button");
+    button.className="day-btn";
+
+    if(state.completedDays.includes(i)){
+      button.classList.add("done");
+      button.textContent="✓ "+i;
+      button.onclick=()=>{
+        setupLesson(i);
+        showSection("learn");
+      };
+    }
+    else if(i===state.currentDay){
+      button.classList.add("current");
+      button.textContent=i;
+      button.onclick=()=>{
+        setupLesson(i);
+        showSection("learn");
+      };
+    }
+    else if(i<state.currentDay){
+      button.textContent=i;
+      button.onclick=()=>{
+        setupLesson(i);
+        showSection("learn");
+      };
+    }
+    else{
+      button.classList.add("locked");
+      button.textContent="🔒";
+      button.disabled=true;
+    }
+
+    box.appendChild(button);
+  }
+}
+
+
+/* =========================================================
+   LEVELS
+   ========================================================= */
+
+function updateLevel(){
+
+  const xp=state.xp;
+
+  let level="Beginner";
+  let next=100;
+  let previous=0;
+
+  if(xp>=100){
+    level="Polish Starter";
+    previous=100;
+    next=250;
+  }
+
+  if(xp>=250){
+    level="Polish Learner";
+    previous=250;
+    next=500;
+  }
+
+  if(xp>=500){
+    level="Polish Explorer";
+    previous=500;
+    next=1000;
+  }
+
+  if(xp>=1000){
+    level="Polish Speaker";
+    previous=1000;
+    next=2000;
+  }
+
+  if(xp>=2000){
+    level="Polish Master";
+    previous=2000;
+    next=3000;
+  }
+
+  if(xp>=3000){
+    level="Polish Champion 🏆";
+    previous=3000;
+    next=4000;
+  }
+
+  document.getElementById("levelName").textContent=level;
+  document.getElementById("levelXP").textContent=xp;
+
+  const percentage=
+    Math.min(100,
+      Math.round(((xp-previous)/(next-previous))*100)
+    );
+
+  document.getElementById("levelProgress").style.width=
+    percentage+"%";
+}
+
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+
+function updateProgress(){
+
+  const percent=
+    Math.round(
+      (state.completedDays.length/lessons.length)*100
+    );
+
+  document.getElementById("progressPercent").textContent=
+    percent+"%";
+
+  document.getElementById("progressBar").style.width=
+    percent+"%";
+
+  buildAchievements();
+  buildMistakes();
+}
+
+function buildAchievements(){
+
+  const achievements=[
+
+    ["🌱","First Steps","Complete your first lesson",
+      state.completedDays.length>=1],
+
+    ["📚","Getting Started","Complete 5 days",
+      state.completedDays.length>=5],
+
+    ["🔥","One Week","Keep a 7 day streak",
+      state.streak>=7],
+
+    ["🏆","Polish Starter","Complete 10 days",
+      state.completedDays.length>=10],
+
+    ["💯","100 XP","Earn 100 XP",
+      state.xp>=100],
+
+    ["⭐","500 XP","Earn 500 XP",
+      state.xp>=500],
+
+    ["🧠","Quiz Starter","Answer 10 quiz questions correctly",
+      state.quizCorrect>=10],
+
+    ["🎧","Good Listener","Complete 10 listening exercises",
+      state.listening>=10],
+
+    ["🗣️","Speaker","Try 10 speaking exercises",
+      state.speaking>=10],
+
+    ["🇵🇱","Polish Learner","Complete 25 days",
+      state.completedDays.length>=25],
+
+    ["🥇","Halfway There","Complete 50 days",
+      state.completedDays.length>=50],
+
+    ["🏆","Polish Master","Complete all 100 days",
+      state.completedDays.length>=100]
+  ];
+
+  const box=document.getElementById("achievements");
+  box.innerHTML="";
+
+  achievements.forEach(a=>{
+
+    const div=document.createElement("div");
+
+    div.className=
+      "achievement "+(a[3] ? "unlocked":"");
+
+    div.innerHTML=`
+      <div class="achievement-icon">${a[0]}</div>
+      <div>
+        <strong>${a[1]}</strong>
+        <br>
+        <span class="small">${a[2]}</span>
+      </div>
+    `;
+
+    box.appendChild(div);
+  });
+}
+
+function buildMistakes(){
+
+  const box=document.getElementById("mistakesList");
+
+  if(state.mistakes.length===0){
+
+    box.innerHTML=
+      "<p>🎉 No mistakes recorded yet. Great work!</p>";
+
+    return;
+  }
+
+  const recent=state.mistakes.slice(-10).reverse();
+
+  box.innerHTML="";
+
+  recent.forEach(m=>{
+
+    const div=document.createElement("div");
+
+    div.className="phrase-box";
+
+    div.innerHTML=`
+      <strong>Day ${m.day}</strong>
+      <p>${m.question}</p>
+      <p>✅ Correct answer: <strong>${m.answer}</strong></p>
+    `;
+
+    box.appendChild(div);
+  });
 }
 
 
@@ -2022,65 +1651,33 @@ ${a[3]?"✅ Unlocked":"🔒 Locked"}
 
 function resetProgress(){
 
-const confirmed=
-confirm(
-"Are you sure you want to reset all Polish Buddy progress?"
-);
+  const answer=confirm(
+    "Are you sure you want to reset all your Polish Buddy progress?"
+  );
 
-if(!confirmed){
-return;
-}
+  if(!answer)return;
 
-state={
-done:[],
-xp:0,
-answers:0,
-streak:1,
-mistakes:[],
-conversations:0,
-listening:0
-};
+  state={...defaultState};
 
-saveState();
+  saveState();
 
-renderLessons();
+  alert("Your progress has been reset.");
 
-goHome();
-
+  showSection("home");
 }
 
 
 /* =========================================================
-   START APPLICATION
+   INITIALISE
    ========================================================= */
 
-function startApp(){
-
-renderLessons();
-
-renderConversations();
+function updateUI(){
+  updateHome();
+}
 
 updateUI();
 
-}
-
-
-/* =========================================================
-   START
-   ========================================================= */
-
-if(document.readyState==="loading"){
-
-document.addEventListener(
-"DOMContentLoaded",
-startApp
-);
-
-}else{
-
-startApp();
-
-}
+setupLesson(state.currentDay);
 
 </script>
 
