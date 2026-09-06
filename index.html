@@ -27,7 +27,7 @@
 </head>
 <body>
 <div class="app">
-<header class="top"><div class="header"><div><div class="flag">🇵🇱</div><h1>Polish Buddy</h1><div class="sub">V5.2 • 100-Day Polish Course</div></div><div style="text-align:right"><b id="xp">0 XP</b><div class="sub">🔥 <span id="streak">0</span></div></div></div></header>
+<header class="top"><div class="header"><div><div class="flag">🇵🇱</div><h1>Polish Buddy</h1><div class="sub">V5.2.1 • 100-Day Polish Course</div></div><div style="text-align:right"><b id="xp">0 XP</b><div class="sub">🔥 <span id="streak">0</span></div></div></div></header>
 
 <main class="content">
 <section id="home">
@@ -77,7 +77,7 @@ function el(x){return document.getElementById(x)}
 function unlocked(d){return state.paidDemo||d<=FREE||state.completed.includes(d)}
 function show(id){document.querySelectorAll('main section').forEach(x=>x.classList.add('hidden'));el(id).classList.remove('hidden');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('on'));if(id==='home')el('nh').classList.add('on');if(id==='progress')el('np').classList.add('on');scrollTo(0,0);update()}
 function speak(t){if(!window.speechSynthesis){alert('Speech playback is unavailable on this device.');return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='pl-PL';u.rate=.78;speechSynthesis.speak(u)}
-function openDay(d){if(!unlocked(d)){show('paywall');return}currentDay=d;let l=lessons[d-1];el('daylabel').textContent='DAY '+d+' OF '+TOTAL;el('ltitle').textContent=l.icon+' '+l.title;el('lword').textContent=l.pl;el('lpron').textContent=l.pron;el('lmeaning').textContent=l.en;el('lexamplepl').textContent=l.examplePl;el('lexampleen').textContent=l.exampleEn;el('lsay').textContent=l.pron;el('ldialogue').innerHTML=l.dialogue.map(x=>'<div class="dialogue-line"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join('');el('ltip').textContent=l.tip;show('learn')}
+function openDay(d){if(!unlocked(d)){show('paywall');return}currentDay=d;let l=lessons[d-1];el('daylabel').textContent='DAY '+d+' OF '+TOTAL;el('ltitle').textContent=l.icon+' '+l.title;el('lword').textContent=l.pl;el('lpron').textContent=l.pron;el('lmeaning').textContent=l.en;el('lexamplepl').textContent=l.examplePl;el('lexampleen').textContent=l.exampleEn;el('ldialogue').innerHTML=l.dialogue.map(x=>'<div class="dialogue-line"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join('');el('ltip').textContent=l.tip;show('learn')}
 function speakCurrent(){speak(lessons[currentDay-1].pl)}
 function speakExample(){speak(lessons[currentDay-1].examplePl)}
 function startQuiz(){let l=lessons[currentDay-1];let pool=lessons.filter(x=>x!==l).sort(()=>Math.random()-.5).slice(0,3);questions=[{q:'What does “'+l.pl+'” mean?',a:l.en,o:[l.en,...pool.map(x=>x.en)]},{q:'Which Polish phrase means “'+l.en+'”?',a:l.pl,o:[l.pl,...pool.map(x=>x.pl)]},{q:'How do you pronounce “'+l.pl+'”?',a:l.pron,o:[l.pron,...pool.map(x=>x.pron)]},{q:'Which meaning matches '+l.pl+'?',a:l.en,o:[l.en,...pool.map(x=>x.en)]},{q:'Choose the Polish phrase for “'+l.en+'”.',a:l.pl,o:[l.pl,...pool.map(x=>x.pl)]}];questions.forEach(x=>x.o.sort(()=>Math.random()-.5));qIndex=0;score=0;renderQ();show('quiz')}
