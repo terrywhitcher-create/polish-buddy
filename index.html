@@ -27,7 +27,7 @@
 </head>
 <body>
 <div class="app">
-<header class="top"><div class="header"><div><div class="flag">🇵🇱</div><h1>Polish Buddy</h1><div class="sub">V5.2.1 • 100-Day Polish Course</div></div><div style="text-align:right"><b id="xp">0 XP</b><div class="sub">🔥 <span id="streak">0</span></div></div></div></header>
+<header class="top"><div class="header"><div><div class="flag">🇵🇱</div><h1>Polish Buddy</h1><div class="sub">V5.2.2 • 100-Day Polish Course</div></div><div style="text-align:right"><b id="xp">0 XP</b><div class="sub">🔥 <span id="streak">0</span></div></div></div></header>
 
 <main class="content">
 <section id="home">
@@ -76,7 +76,32 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){} u
 function el(x){return document.getElementById(x)}
 function unlocked(d){return state.paidDemo||d<=FREE||state.completed.includes(d)}
 function show(id){document.querySelectorAll('main section').forEach(x=>x.classList.add('hidden'));el(id).classList.remove('hidden');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('on'));if(id==='home')el('nh').classList.add('on');if(id==='progress')el('np').classList.add('on');scrollTo(0,0);update()}
-function speak(t){if(!window.speechSynthesis){alert('Speech playback is unavailable on this device.');return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='pl-PL';u.rate=.78;speechSynthesis.speak(u)}
+function speak(t){
+  if(!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)){
+    alert('Speech playback is not available in this browser. Please open Polish Buddy in Safari or Chrome.');
+    return;
+  }
+  try{
+    const synth=window.speechSynthesis;
+    synth.cancel();
+    const u=new SpeechSynthesisUtterance(t);
+    u.lang='pl-PL';
+    u.rate=0.78;
+    u.pitch=1;
+    const voices=synth.getVoices();
+    const plVoice=voices.find(v=>String(v.lang||'').toLowerCase().startsWith('pl'));
+    if(plVoice) u.voice=plVoice;
+    u.onerror=function(){alert('I could not play the Polish voice on this device. Try opening the app in Safari/Chrome and make sure your phone volume is on.');};
+    synth.resume();
+    synth.speak(u);
+    setTimeout(()=>{ if(synth.paused) synth.resume(); },150);
+  }catch(e){
+    alert('I could not start the Polish audio. Try opening Polish Buddy in Safari or Chrome.');
+  }
+}
+if('speechSynthesis' in window){
+  window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices();
+}
 function openDay(d){if(!unlocked(d)){show('paywall');return}currentDay=d;let l=lessons[d-1];el('daylabel').textContent='DAY '+d+' OF '+TOTAL;el('ltitle').textContent=l.icon+' '+l.title;el('lword').textContent=l.pl;el('lpron').textContent=l.pron;el('lmeaning').textContent=l.en;el('lexamplepl').textContent=l.examplePl;el('lexampleen').textContent=l.exampleEn;el('ldialogue').innerHTML=l.dialogue.map(x=>'<div class="dialogue-line"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join('');el('ltip').textContent=l.tip;show('learn')}
 function speakCurrent(){speak(lessons[currentDay-1].pl)}
 function speakExample(){speak(lessons[currentDay-1].examplePl)}
