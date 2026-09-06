@@ -28,13 +28,13 @@
 </head>
 <body>
 <div class="app">
-<header class="top"><div class="header"><div><div class="flag">🇵🇱</div><h1>Polish Buddy</h1><div class="sub">V5.5 • 100-Day Polish Course</div></div><div style="text-align:right"><b id="xp">0 XP</b><div class="sub">🔥 <span id="streak">0</span></div></div></div></header>
+<header class="top"><div class="header"><div><div class="flag">🇵🇱</div><h1>Polish Buddy</h1><div class="sub">V5.6 • 100-Day Polish Course</div></div><div style="text-align:right"><b id="xp">0 XP</b><div class="sub">🔥 <span id="streak">0</span></div></div></div></header>
 
 <main class="content">
 <section id="home">
 <div class="hero"><div class="free-pill">3 DAYS FREE • NO SIGN-UP</div><div class="sub">YOUR DAILY POLISH COURSE</div><h2 style="color:#fff">Speak useful Polish in 100 days 🇵🇱</h2><div class="sub">English pronunciation • Polish audio • Real conversations • Quizzes</div>
 <div class="stats"><div class="stat"><b id="hday">1</b>Day</div><div class="stat"><b id="hpct">0%</b>Complete</div><div class="stat"><b id="hxp">0</b>XP</div></div></div>
-<div class="card welcome"><h2>👋 Welcome to Polish Buddy</h2><p>Learn practical Polish in short daily lessons designed for English speakers.</p><div class="check">✓ See exactly what the Polish means in English</div><div class="check">✓ Read an easy English pronunciation guide</div><div class="check">✓ Hear every phrase spoken in Polish</div><div class="check">✓ Practise with conversations and quizzes</div></div>
+<div class="card welcome"><h2>👋 Welcome to Polish Buddy</h2><p>Learn practical Polish in short daily lessons designed for English speakers.</p><div class="check">✓ See exactly what the Polish means in English</div><div class="check">✓ Read an easy English pronunciation guide</div><div class="check">✓ Hear every phrase spoken in Polish</div><div class="check">✓ Practise with conversations and quizzes</div><div class="small" style="margin-top:12px">🌐 Works best in Safari, Chrome & Microsoft Edge</div></div>
 <div class="card"><h2>🎯 Today's Lesson</h2><b id="today"></b><div class="sub" id="todaySub"></div><button class="btn" onclick="openDay(state.currentDay)">▶ Start today's lesson</button></div>
 <div class="card" id="unlockCard"><h2>🎁 Try the first 3 days free</h2><p>Complete three full lessons before deciding. Then unlock Days 4–100 for a one-off £9.99.</p><button class="btn dark" onclick="show('paywall')">See the full course →</button></div>
 <div class="card"><h2>🗺️ Your 100-Day Journey</h2><div class="course-path"><div class="path-item"><div class="path-icon">👋</div><div><b>Days 1–10 • Foundations</b><div class="small">Greetings, introductions and essential Polish</div></div></div><div class="path-item"><div class="path-icon">🗣️</div><div><b>Days 11–30 • Everyday Polish</b><div class="small">Numbers, questions and useful daily phrases</div></div></div><div class="path-item"><div class="path-icon">👨‍👩‍👧</div><div><b>Days 31–60 • People & Food</b><div class="small">Family, people, food and ordering</div></div></div><div class="path-item"><div class="path-icon">🛍️</div><div><b>Days 61–80 • Real-life Situations</b><div class="small">Restaurants, shopping and practical conversations</div></div></div><div class="path-item"><div class="path-icon">🇵🇱</div><div><b>Days 81–100 • Speaking Confidence</b><div class="small">Build towards real everyday Polish</div></div></div></div></div>
@@ -129,7 +129,7 @@ function unlocked(d){return state.paidDemo||d<=FREE||state.completed.includes(d)
 function show(id){document.querySelectorAll('main section').forEach(x=>x.classList.add('hidden'));el(id).classList.remove('hidden');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('on'));if(id==='home')el('nh').classList.add('on');if(id==='progress')el('np').classList.add('on');scrollTo(0,0);update()}
 function speak(t){
   if(!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)){
-    alert('Speech playback is not available in this browser. Please open Polish Buddy in Safari or Chrome.');
+    alert('Speech playback is not available in this browser. Please open Polish Buddy in Safari, Chrome or Microsoft Edge.');
     return;
   }
   try{
@@ -142,12 +142,12 @@ function speak(t){
     const voices=synth.getVoices();
     const plVoice=voices.find(v=>String(v.lang||'').toLowerCase().startsWith('pl'));
     if(plVoice) u.voice=plVoice;
-    u.onerror=function(){alert('I could not play the Polish voice on this device. Try opening the app in Safari/Chrome and make sure your phone volume is on.');};
+    u.onerror=function(){alert('I could not play the Polish voice on this device. Try opening the app in Safari, Chrome or Microsoft Edge and make sure your phone volume is on.');};
     synth.resume();
     synth.speak(u);
     setTimeout(()=>{ if(synth.paused) synth.resume(); },150);
   }catch(e){
-    alert('I could not start the Polish audio. Try opening Polish Buddy in Safari or Chrome.');
+    alert('I could not start the Polish audio. Try opening Polish Buddy in Safari, Chrome or Microsoft Edge.');
   }
 }
 if('speechSynthesis' in window){
@@ -169,7 +169,7 @@ function review(){let d=state.completed.length?state.completed[Math.floor(Math.r
 function resetAll(){if(confirm('Reset all Polish Buddy progress?')){state={...defaults};save();show('home')}}
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function update(){let pct=Math.round(state.completed.length/TOTAL*100),d=Math.min(state.currentDay,TOTAL),l=lessons[d-1];el('xp').textContent=state.xp+' XP';el('streak').textContent=state.streak;el('hday').textContent=state.currentDay;el('hpct').textContent=pct+'%';el('hxp').textContent=state.xp;el('today').textContent='Day '+d+' — '+l.title;el('todaySub').textContent=l.pl+' • '+l.en;el('pd').textContent=state.completed.length;el('px').textContent=state.xp;el('pc').textContent=state.correct;el('pl').textContent=Math.floor(state.xp/100)+1;el('progressFill').style.width=pct+'%';el('progressText').textContent=state.completed.length+' of 100 days complete • '+pct+'% of your Polish journey';
-el('days').innerHTML=lessons.map((x,i)=>{let d=i+1,done=state.completed.includes(d),lock=!unlocked(d);return '<div class="day '+(done?'done ':'')+(lock?'locked':'')+'" onclick="openDay('+d+')"><div class="num">'+(done?'✓':d)+'</div><div><b>Day '+d+' — '+esc(x.title)+'</b><div class="small">'+(lock?'🔒 Locked':(d<=3&&!state.paidDemo?'🆓 FREE • 🇵🇱 '+esc(x.pl):'🇵🇱 '+esc(x.pl)))+'</div></div><div class="tick">'+(lock?'🔒':done?'⭐':'›')+'</div></div>'}).join('');
+el('days').innerHTML=lessons.map((x,i)=>{let d=i+1,done=state.completed.includes(d),lock=!unlocked(d);return '<div class="day '+(done?'done ':'')+(lock?'locked':'')+'" onclick="openDay('+d+')"><div class="num">'+(done?'✓':d)+'</div><div><b>Day '+d+' — '+esc(x.title)+'</b><div class="small">'+(lock?'🔒 Preview topic • '+esc(x.en):(d<=3&&!state.paidDemo?'🆓 FREE • 🇵🇱 '+esc(x.pl):'🇵🇱 '+esc(x.pl)))+'</div></div><div class="tick">'+(lock?'🔒':done?'⭐':'›')+'</div></div>'}).join('');
 let ach=[[state.completed.length>=1,'🌱','First Steps','Complete Day 1'],[state.completed.length>=7,'📚','First Week','Complete 7 days'],[state.completed.length>=30,'🇵🇱','Polish Starter','Complete 30 days'],[state.completed.length>=50,'🏆','Polish Learner','Complete 50 days'],[state.completed.length>=100,'🎓','100-Day Graduate','Complete all 100 days'],[state.xp>=100,'⭐','100 XP','Earn 100 XP'],[state.xp>=500,'💫','500 XP','Earn 500 XP'],[state.correct>=25,'🧠','Quiz Builder','25 correct answers'],[state.streak>=7,'🔥','7-Day Streak','Learn for 7 days in a row']];el('ach').innerHTML=ach.map(a=>'<div class="badge '+(a[0]?'':'locked')+'">'+a[1]+' <b>'+a[2]+'</b><br><span class="small">'+a[3]+'</span></div>').join('')}
 update();show('home');
 </script>
