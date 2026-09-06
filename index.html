@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#c8102e">
-<title>Polish Buddy V5.1.1</title>
+<title>Polish Buddy V5.1.2</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f5f5f7;color:#171717;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 .app{max-width:600px;margin:auto;min-height:100vh;padding-bottom:78px}.top{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid #ddd;padding:16px}
@@ -26,7 +26,7 @@
 </head>
 <body>
 <div class="app">
-<header class="top"><div class="header"><div><div class="flag">🇵🇱</div><h1>Polish Buddy</h1><div class="sub">V5.1.1 • 100-Day Polish Course</div></div><div style="text-align:right"><b id="xp">0 XP</b><div class="sub">🔥 <span id="streak">0</span></div></div></div></header>
+<header class="top"><div class="header"><div><div class="flag">🇵🇱</div><h1>Polish Buddy</h1><div class="sub">V5.1.2 • 100-Day Polish Course</div></div><div style="text-align:right"><b id="xp">0 XP</b><div class="sub">🔥 <span id="streak">0</span></div></div></div></header>
 
 <main class="content">
 <section id="home">
@@ -74,8 +74,8 @@ function speak(t){if(!window.speechSynthesis){alert('Speech playback is unavaila
 function openDay(d){if(!unlocked(d)){show('paywall');return}currentDay=d;let l=lessons[d-1];el('daylabel').textContent='DAY '+d+' OF '+TOTAL;el('ltitle').textContent=l.title;el('lword').textContent=l.pl;el('lpron').textContent='Pronunciation: '+l.pron;el('lmeaning').textContent=l.en;el('lsay').textContent=l.pron;el('ltip').textContent='Listen carefully, repeat the Polish phrase, then test yourself in the quiz.';show('learn')}
 function speakCurrent(){speak(lessons[currentDay-1].pl)}
 function startQuiz(){let l=lessons[currentDay-1];let pool=lessons.filter(x=>x!==l).sort(()=>Math.random()-.5).slice(0,3);questions=[{q:'What does “'+l.pl+'” mean?',a:l.en,o:[l.en,...pool.map(x=>x.en)]},{q:'Which Polish phrase means “'+l.en+'”?',a:l.pl,o:[l.pl,...pool.map(x=>x.pl)]},{q:'How do you pronounce “'+l.pl+'”?',a:l.pron,o:[l.pron,...pool.map(x=>x.pron)]},{q:'Which meaning matches '+l.pl+'?',a:l.en,o:[l.en,...pool.map(x=>x.en)]},{q:'Choose the Polish phrase for “'+l.en+'”.',a:l.pl,o:[l.pl,...pool.map(x=>x.pl)]}];questions.forEach(x=>x.o.sort(()=>Math.random()-.5));qIndex=0;score=0;renderQ();show('quiz')}
-function renderQ(){let q=questions[qIndex];el('qcount').textContent='Question '+(qIndex+1)+' of 5';el('question').textContent=q.q;el('answers').innerHTML=q.o.map(x=>'<button class="btn secondary" onclick="answer(this,'+JSON.stringify(x)+')">'+esc(x)+'</button>').join('');el('feedback').innerHTML='';el('feedback').className='';el('next').classList.add('hidden')}
-function answer(btn,x){let q=questions[qIndex];if(btn.dataset.answered==='1')return;btn.dataset.answered='1';document.querySelectorAll('#answers button').forEach(b=>b.disabled=true);if(x===q.a){btn.classList.add('correct');el('feedback').className='feedback ok';el('feedback').textContent='✓ Correct! +10 XP';state.xp+=10;state.correct++;score++}else{btn.classList.add('wrong');document.querySelectorAll('#answers button').forEach(b=>{if(b.textContent.trim()===q.a.trim())b.classList.add('show-correct')});el('feedback').className='feedback bad';el('feedback').textContent='Not quite. The correct answer is highlighted in green.';state.mistakes.push(q.a)}save();el('next').classList.remove('hidden');el('next').textContent=qIndex===4?'Finish daily lesson →':'Next question →'}
+function renderQ(){let q=questions[qIndex];el('qcount').textContent='Question '+(qIndex+1)+' of 5';el('question').textContent=q.q;el('answers').innerHTML=q.o.map((x,i)=>'<button class="btn secondary" onclick="answer(this)" data-i="'+i+'">'+esc(x)+'</button>').join('');el('feedback').innerHTML='';el('feedback').className='';el('next').classList.add('hidden')}
+function answer(btn){let q=questions[qIndex];let x=q.o[Number(btn.dataset.i)];if(btn.dataset.answered==='1')return;btn.dataset.answered='1';document.querySelectorAll('#answers button').forEach(b=>b.disabled=true);if(x===q.a){btn.classList.add('correct');el('feedback').className='feedback ok';el('feedback').textContent='✓ Correct! +10 XP';state.xp+=10;state.correct++;score++}else{btn.classList.add('wrong');document.querySelectorAll('#answers button').forEach(b=>{if(b.dataset.i!==undefined && q.o[Number(b.dataset.i)]===q.a)b.classList.add('show-correct')});el('feedback').className='feedback bad';el('feedback').textContent='Not quite. The correct answer is highlighted in green.';state.mistakes.push(q.a)}save();el('next').classList.remove('hidden');el('next').textContent=qIndex===4?'Finish daily lesson →':'Next question →'}
 function nextQ(){if(qIndex<4){qIndex++;renderQ()}else finishDay()}
 function finishDay(){if(!state.completed.includes(currentDay)){state.completed.push(currentDay);state.xp+=20;streak();}state.currentDay=Math.min(TOTAL,currentDay+1);save();show('home');alert('Day '+currentDay+' complete! You earned '+(score*10+20)+' XP.')}
 function streak(){let today=new Date().toISOString().slice(0,10),y=new Date(Date.now()-86400000).toISOString().slice(0,10);if(state.last===today)return;state.streak=state.last===y?state.streak+1:1;state.last=today}
