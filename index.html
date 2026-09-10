@@ -28,7 +28,7 @@
 </head>
 <body>
 <div class="app">
-<header class="top"><div class="header"><div><div class="flag">🇵🇱</div><h1>Polish Buddy</h1><div class="sub">V5.6 • 100-Day Polish Course</div></div><div style="text-align:right"><b id="xp">0 XP</b><div class="sub">🔥 <span id="streak">0</span></div></div></div></header>
+<header class="top"><div class="header"><div><div class="flag">🇵🇱</div><h1>Polish Buddy</h1><div class="sub">V5.6.1 • 100-Day Polish Course</div></div><div style="text-align:right"><b id="xp">0 XP</b><div class="sub">🔥 <span id="streak">0</span></div></div></div></header>
 
 <main class="content">
 <section id="home">
@@ -116,7 +116,7 @@ const courseModules=[
 ];
 function moduleForDay(d){return courseModules.find(m=>d>=m.from&&d<=m.to)||courseModules[0]}
 function paidDayPhrases(d){let l=lessons[d-1],m=moduleForDay(d),base={pl:l.pl,en:l.en,pron:l.pron};let extras=m.phrases.map(x=>({pl:x[0],en:x[1],pron:x[2]})).filter(x=>x.pl!==base.pl);let start=(d-m.from)%extras.length;let picked=[];for(let i=0;i<5;i++)picked.push(extras[(start+i)%extras.length]);return [base,...picked]}
-function lessonContext(d){if(d<=3)return null;let m=moduleForDay(d),ps=paidDayPhrases(d);return {title:m.name+' • '+lessons[d-1].title,examplePl:ps[0].pl+' — '+ps[1].pl+'.',exampleEn:ps[0].en+' — '+ps[1].en+'.',dialogue:[['Polish Buddy',ps[1].pl],['You',ps[0].pl],['Polish Buddy',ps[2].pl],['You',ps[3].pl]],tip:'Learn the six phrases, tap Hear Polish for each one, then say them aloud before starting the quiz.'}}
+function lessonContext(d){if(d<=3)return null;let m=moduleForDay(d),ps=paidDayPhrases(d);return {title:m.name+' • '+lessons[d-1].title,examplePl:ps[0].pl,exampleEn:ps[0].en,dialogue:[['Polish Buddy',ps[1].pl],['You',ps[0].pl],['Polish Buddy',ps[2].pl],['You',ps[3].pl]],tip:'Learn the six phrases, tap Hear Polish for each one, then say them aloud before starting the quiz.'}}
 
 const TOTAL=lessons.length, FREE=3, KEY='polishBuddyV54';
 const defaults={currentDay:1,completed:[],xp:0,streak:0,last:'',correct:0,paidDemo:false,mistakes:[]};
@@ -157,7 +157,7 @@ function dayPhrases(d){return freeDayPhrases[d]||paidDayPhrases(d)}
 function openDay(d){if(!unlocked(d)){show('paywall');return}currentDay=d;let l=lessons[d-1],ps=dayPhrases(d),c=lessonContext(d);el('daylabel').textContent='DAY '+d+' OF '+TOTAL;el('ltitle').textContent=l.icon+' '+(c?c.title:l.title);el('lphrases').innerHTML=ps.map((p,i)=>'<div class="phrase-card"><div class="phrase-pl">🇵🇱 '+esc(p.pl)+'</div><div class="phrase-en">🇬🇧 '+esc(p.en)+'</div><div class="phrase-pron">🗣️ '+esc(p.pron)+'</div><button class="btn secondary" onclick="speakPhrase('+i+')">🔊 Hear Polish</button></div>').join('');el('lexamplepl').textContent=c?c.examplePl:l.examplePl;el('lexampleen').textContent=c?c.exampleEn:l.exampleEn;let dg=c?c.dialogue:l.dialogue;el('ldialogue').innerHTML=dg.map(x=>'<div class="dialogue-line"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join('');el('ltip').textContent=c?c.tip:l.tip;show('learn')}
 function speakPhrase(i){let p=dayPhrases(currentDay)[i];if(p)speak(p.pl)}
 function speakCurrent(){speakPhrase(0)}
-function speakExample(){speak(lessons[currentDay-1].examplePl)}
+function speakExample(){const shown=el('lexamplepl').textContent.trim();if(shown)speak(shown)}
 function startQuiz(){let ps=dayPhrases(currentDay), pool=[];if(currentDay<=3){for(let d=1;d<=3;d++)pool.push(...dayPhrases(d))}else{let m=moduleForDay(currentDay);for(let d=m.from;d<=m.to;d++)pool.push(...dayPhrases(d))}let chosen=[...ps].sort(()=>Math.random()-.5).slice(0,5);while(chosen.length<5)chosen.push(ps[chosen.length%ps.length]);questions=chosen.map((p,i)=>{let others=pool.filter(x=>x.pl!==p.pl).sort(()=>Math.random()-.5).slice(0,3);if(i%3===0)return {q:'What does “'+p.pl+'” mean?',a:p.en,o:[p.en,...others.map(x=>x.en)]};if(i%3===1)return {q:'Which Polish phrase means “'+p.en+'”?',a:p.pl,o:[p.pl,...others.map(x=>x.pl)]};return {q:'How do you pronounce “'+p.pl+'”?',a:p.pron,o:[p.pron,...others.map(x=>x.pron)]}});questions.forEach(x=>x.o.sort(()=>Math.random()-.5));qIndex=0;score=0;renderQ();show('quiz')}
 function renderQ(){let q=questions[qIndex];el('qcount').textContent='Question '+(qIndex+1)+' of 5';el('question').textContent=q.q;el('answers').innerHTML=q.o.map((x,i)=>'<button class="btn secondary" onclick="answer(this)" data-i="'+i+'">'+esc(x)+'</button>').join('');el('feedback').innerHTML='';el('feedback').className='';el('next').classList.add('hidden')}
 function answer(btn){let q=questions[qIndex];let x=q.o[Number(btn.dataset.i)];if(btn.dataset.answered==='1')return;btn.dataset.answered='1';document.querySelectorAll('#answers button').forEach(b=>b.disabled=true);if(x===q.a){btn.classList.add('correct');el('feedback').className='feedback ok';el('feedback').textContent='✓ Correct! +10 XP';state.xp+=10;state.correct++;score++}else{btn.classList.add('wrong');document.querySelectorAll('#answers button').forEach(b=>{if(b.dataset.i!==undefined && q.o[Number(b.dataset.i)]===q.a)b.classList.add('show-correct')});el('feedback').className='feedback bad';el('feedback').textContent='Not quite. The correct answer is highlighted in green.';state.mistakes.push(q.a)}save();el('next').classList.remove('hidden');el('next').textContent=qIndex===4?'Finish daily lesson →':'Next question →'}
